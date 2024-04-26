@@ -25,7 +25,9 @@ public class Flights {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime arrival_time;
     private String destination;
+    private String departure_point;
     private Integer aircraft_id;
+    private Double price;
 
     @OneToMany
     @JoinColumn(name = "flights_id")
