@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @Setter
 @Getter
+@Entity
 @Table(name = "passengers")
 public class Passengers {
     @Id
@@ -24,11 +25,10 @@ public class Passengers {
     private String address;
     private String city;
     private String post_code;
-    private Integer user_id;
 
-    @ManyToOne(optional = true)
+    @ManyToOne
     @JoinColumn(name = "user_id")
-    private Users users;
+    private Users users_id;
 
 
 }

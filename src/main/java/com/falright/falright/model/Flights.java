@@ -26,10 +26,10 @@ public class Flights {
     private LocalDateTime arrival_time;
     private String destination;
     private String departure_point;
-    //private Integer aircraft_id;
+
     private Double price;
 
     @ManyToOne
     @JoinColumn(name = "aircraft_id")
-    private Aircrafts aircrafts;
+    private Aircrafts aircrafts_id;
 }

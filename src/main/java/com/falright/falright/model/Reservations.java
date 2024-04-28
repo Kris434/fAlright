@@ -12,23 +12,24 @@ import java.util.List;
 @AllArgsConstructor
 @Setter
 @Getter
+@Entity
 @Table(name = "reservations")
 public class Reservations {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer reservation_id;
-    private Integer flight_id;
-    private Integer passenger_id;
+
+
     private Integer seat_number;
     private Boolean status;
 
     @ManyToOne
     @JoinColumn(name = "flight_id")
-    private Flights flights;
+    private Flights flights_id;
 
     @ManyToOne
     @JoinColumn(name = "passenger_id")
-    private Passengers passengers;
+    private Passengers passengers_id;
 
 }
