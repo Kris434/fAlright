@@ -1,6 +1,6 @@
 package com.falright.falright.controller;
 
-import com.falright.falright.model.Aircraft;
+import com.falright.falright.model.Aircrafts;
 import com.falright.falright.repository.AircraftRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,7 @@ public class AircraftController {
     }
 
     @GetMapping("")
-    public @ResponseBody Iterable<Aircraft> getAircrafts()
+    public @ResponseBody Iterable<Aircrafts> getAircrafts()
     {
         return aircraftRepository.findAll();
     }
@@ -26,7 +26,7 @@ public class AircraftController {
     @GetMapping("/add/{model}/{capacity}")
     public String addNewAircraft(@PathVariable("model") String model, @PathVariable("capacity") Integer capacity)
     {
-        Aircraft aircraft = new Aircraft(model, capacity, false);
+        Aircrafts aircraft = new Aircrafts(model, capacity, false);
 
         aircraftRepository.save(aircraft);
 

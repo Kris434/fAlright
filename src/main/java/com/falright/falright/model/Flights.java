@@ -26,14 +26,10 @@ public class Flights {
     private LocalDateTime arrival_time;
     private String destination;
     private String departure_point;
-    private Integer aircraft_id;
+    //private Integer aircraft_id;
     private Double price;
 
-    @OneToMany
-    @JoinColumn(name = "flights_id")
-    private List<Employees> employees;
-
-   @OneToMany
+    @ManyToOne
     @JoinColumn(name = "aircraft_id")
-    private List<Aircraft> aircrafts;
+    private Aircrafts aircrafts;
 }

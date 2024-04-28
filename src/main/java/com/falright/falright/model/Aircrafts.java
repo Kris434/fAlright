@@ -1,6 +1,5 @@
 package com.falright.falright.model;
 
-import com.falright.falright.repository.AircraftRepository;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,8 +11,8 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-@Table(name = "aircraft")
-public class Aircraft {
+@Table(name = "aircrafts")
+public class Aircrafts {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer aircraft_id;
@@ -21,7 +20,7 @@ public class Aircraft {
     private Integer capacity;
     private Boolean status;
 
-    public Aircraft(String model, Integer capacity, Boolean status)
+    public Aircrafts(String model, Integer capacity, Boolean status)
     {
         this.model = model;
         this.capacity = capacity;

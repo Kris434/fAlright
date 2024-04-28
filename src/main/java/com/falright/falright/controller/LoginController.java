@@ -1,14 +1,52 @@
 package com.falright.falright.controller;
 
+import com.falright.falright.model.Users;
+import com.falright.falright.repository.UserRepository;
+import jakarta.servlet.http.HttpSession;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Optional;
 
 @Controller
-@RequestMapping("/login")
 public class LoginController {
-    @GetMapping("")
-    public String login() {
+    private final UserRepository userRepository;
+
+    public LoginController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    @GetMapping("/login")
+    public String getLogin() {
+        return "login";
+    }
+
+    @PostMapping("/login-submit")
+    public String login(@RequestParam("username") String username,
+                        @RequestParam("password") String password,
+                        HttpSession session, Model model) {
+
+        // Znajdź użytkownika w bazie danych na podstawie nazwy użytkownika
+        Optional<Users> optionalUser = userRepository.findByUsername(username);
+
+        // Sprawdź, czy użytkownik istnieje i czy hasło się zgadza
+        if (optionalUser.isPresent()) {
+            Users user = optionalUser.get();
+            if (user.getPassword().equals(password)) {
+                // Ustaw atrybut sesji dla zalogowanego użytkownika
+                session.setAttribute("loggedInUser", user);
+                model.addAttribute("user", user);
+                return "login-success"; // Przekieruj do strony powitalnej po zalogowaniu
+            }
+        }
+
+        // Jeśli użytkownik nie istnieje lub hasło jest nieprawidłowe, zwróć do formularza logowania z komunikatem
+        model.addAttribute("error", "Invalid username or password. Please try again.");
         return "login";
     }
 }

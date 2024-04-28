@@ -18,14 +18,17 @@ public class Passengers {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer passenger_id;
     private String name;
-    private String contact_information;
+    private String surname;
+    private Integer phone_number;
+    private String email;
+    private String address;
+    private String city;
+    private String post_code;
     private Integer user_id;
 
-    @OneToMany
+    @ManyToOne(optional = true)
     @JoinColumn(name = "user_id")
-    private List<Users> users;
+    private Users users;
 
-    @OneToMany
-    @JoinColumn(name = "passenger_id")
-    private List<Reservations> passengers;
+
 }

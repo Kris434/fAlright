@@ -23,8 +23,12 @@ public class Reservations {
     private Integer seat_number;
     private Boolean status;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "flight_id")
-    private List<Flights> flights;
+    private Flights flights;
+
+    @ManyToOne
+    @JoinColumn(name = "passenger_id")
+    private Passengers passengers;
 
 }

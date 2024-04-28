@@ -1,15 +1,33 @@
 package com.falright.falright.controller;
 
+import com.falright.falright.model.Users;
+import com.falright.falright.repository.UserRepository;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/register")
 public class RegisterController {
 
-    @GetMapping("")
-    public String register() {
+    private final UserRepository userRepository;
+
+
+    public RegisterController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    @GetMapping("/register")
+    public String getRegister() {
         return "register";
+    }
+
+    @PostMapping("/register-submit")
+    public String register(@ModelAttribute Users user, Model model) {
+
+        user.setRole(Users.Role.LOGGED);
+        userRepository.save(user); // zapisanie użytkownika do bazy danych
+
+        model.addAttribute("user", user);
+        return "register-success";
     }
 }
