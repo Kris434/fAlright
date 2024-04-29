@@ -45,3 +45,67 @@ a {
 a:hover {
     text-decoration: underline; /* Podkreślenie linku po najechaniu myszką */
 }
+
+.button-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+.button {
+    padding: 15px 30px;
+    background-color: #ffffff;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    font: 15px Arial, sans-serif, bold;
+}
+.search-form {
+    max-width: 1200px;
+    padding: 20px;
+    border: 5px solid #68BBE3;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #4395DC
+}
+.search-form input[type="text"],
+.search-form input[type="date"],
+.search-form input[type="number"],
+.search-form button {
+    margin: 0 5px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f2f2f2;
+}
+.header {
+    position: fixed;
+    background-color: #4395DC;
+    color: #fff;
+    padding: 40px 20px;
+    top: 0; /* Umieszcza element na górze strony */
+    width: 100%; /* Zajmuje całą szerokość strony */
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+header div p {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    font: 34px Arial, sans-serif, bold;
+
+}

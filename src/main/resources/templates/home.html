@@ -6,9 +6,32 @@
     <title>Strona Główna - Linie Lotnicze</title>
     <link rel="stylesheet" href="/css/HomeCSS.css">
 </head>
+<header class = "header">
+    <div class = "header-content">
+        <p>Witaj w naszych liniach lotniczych</p>
+        <div class="button-container">
+            <a href="/login">
+                <button class="button">Zaloguj się</button>
+            </a>
+            <a href="/register">
+                <button class="button">Zarejestruj się</button>
+            </a>
+        </div>
+    </div>
+
+</header>
 <body>
-<h2>Witaj w Centrum Linii Lotniczych!</h2>
-<p>Jeśli jesteś członkiem naszych linii lotniczych, możesz się <a href="/login">zalogować tutaj</a>.</p>
-<p>Jeśli jesteś nowy w naszych liniach lotniczych, możesz się <a href="/register">zarejestrować tutaj</a>, aby dołączyć do naszego programu lojalnościowego.</p>
+
+
+    <div class="search-form">
+        <form action="szukaj_lotow.php" method="get">
+            <input type="text" name="departure" placeholder="Miejsce wylotu">
+            <input type="text" name="destination" placeholder="Miejsce przylotu">
+            <input type="date" placeholder="Data przylotu"/>
+            <input type="date" placeholder="Data wylotu"/>
+            <input type="number" name="passengers" placeholder="🙍‍♂️" min="1" max="10">
+            <button type="submit">Szukaj</button>
+        </form>
+    </div>
 </body>
 </html>
