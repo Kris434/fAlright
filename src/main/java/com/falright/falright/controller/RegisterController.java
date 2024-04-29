@@ -34,6 +34,6 @@ public class RegisterController {
         userRepository.save(user); // zapisanie użytkownika do bazy danych
 
         model.addAttribute("user", user);
-        return "register-success";
+        return "home";
     }
 }
