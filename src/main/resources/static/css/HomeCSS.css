@@ -109,3 +109,10 @@ header div p {
     font: 34px Arial, sans-serif, bold;
 
 }
+
+.logged-user {
+    position: absolute;
+    top: 80px;
+    right: 10px;
+    color: black;
+}

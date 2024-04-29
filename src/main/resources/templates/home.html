@@ -21,7 +21,9 @@
 
 </header>
 <body>
-
+<div class="logged-user" th:if="${user != null}">
+    <p th:text="'Zalogowany: ' + ${user.username}"></p>
+</div>
 
     <div class="search-form">
         <form action="szukaj_lotow.php" method="get">
