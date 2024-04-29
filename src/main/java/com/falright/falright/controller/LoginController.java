@@ -46,7 +46,7 @@ public class LoginController {
                 // Ustaw atrybut sesji dla zalogowanego użytkownika
                 session.setAttribute("loggedInUser", user);
                 model.addAttribute("user", user);
-                return "login-success"; // Przekieruj do strony powitalnej po zalogowaniu
+                return "home"; // Przekieruj do strony powitalnej po zalogowaniu
             }
         }
 
