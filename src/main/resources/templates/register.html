@@ -1,19 +1,37 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
     <link rel="stylesheet" href="/css/RegisterCSS.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-<h2>Register</h2>
-<form th:action="@{/register-submit}" th:object="${user}"  method="post">
-    <label for="username">Username:</label><br>
-    <input type="text" id="username" name="username"><br>
-    <label for="password">Password:</label><br>
-    <input type="password" id="password" name="password"><br><br>
-    <input type="submit" value="Register">
-</form>
+
+<div class="container">
+    <div class="card">
+        <div class="top-row">
+            <h1>Welcome!</h1>
+            <p>Sign up for a new account</p>
+        </div>
+        <div class="card-details">
+            <input type="text" placeholder="Enter your name">
+            <i class="fa fa-user"></i>
+        </div>
+        <div class="card-details">
+            <input type="text" placeholder="Enter your email">
+            <i class="fa fa-envelope"></i>
+        </div>
+        <div class="card-details">
+            <input type="password" id="password-input" placeholder="Enter your password">
+            <i class="fa fa-lock"></i>
+            <span><small class="fa fa-eye-slash passcode"></small></span>
+        </div>
+        <button class="sign-in">Sign up</button>
+        <p class="sign-up">Already have an account?<a href="/login"> Log in</a></p>
+    </div>
+</div>
+
 </body>
 </html>
