@@ -13,20 +13,17 @@
             <a href="/login">
                 <button class="button">Zaloguj się</button>
             </a>
-            <a href="/register">
-                <button class="button">Zarejestruj się</button>
-            </a>
         </div>
     </div>
-
 </header>
+
 <body>
-<div class="logged-user" th:if="${user != null}">
-    <p th:text="'Zalogowany: ' + ${user.username}"></p>
-</div>
+    <div class="logged-user" th:if="${user != null}">
+        <p th:text="'Zalogowany: ' + ${user.username}"></p>
+    </div>
 
     <div class="search-form">
-        <form action="szukaj_lotow.php" method="get">
+        <form>
             <input type="text" name="departure" placeholder="Miejsce wylotu">
             <input type="text" name="destination" placeholder="Miejsce przylotu">
             <input type="date" placeholder="Data przylotu"/>
