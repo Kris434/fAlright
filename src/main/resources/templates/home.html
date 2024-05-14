@@ -10,8 +10,8 @@
 <header th:replace="fragments/header :: header"></header>
 
 <body>
-    <div class="logged-user" th:if="${user != null}">
-        <p th:text="'Zalogowany: ' + ${user.username}"></p>
+    <div class="logged-user" th:if="${session.loggedInUser != null}">
+        <p th:text="'Zalogowany: ' + ${session.loggedInUser.getUsername()}"></p>
     </div>
 
     <div class="search-form">

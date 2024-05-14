@@ -55,6 +55,13 @@ public class LoginController {
         return "login";
     }
 
+    @GetMapping("/logout")
+    public String logout(HttpSession session)
+    {
+        session.removeAttribute("loggedInUser");
+        return "home";
+    }
+
     private boolean passwordMatches(String inputPassword, String hashedPassword) {
         // Użyj BCryptPasswordEncoder do porównania hasła
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
