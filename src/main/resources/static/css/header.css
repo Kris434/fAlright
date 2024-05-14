@@ -91,11 +91,11 @@ a button:hover {
 }
 
 .panel-item:hover {
-    background-color: #4395DC;
+    background-color: #007bff;
     border-radius: 5px;
 }
-.m {
-    font: 20px Arial, sans-serif, bold;
+span {
+    font: 15px Arial, sans-serif, bold;
     margin-bottom: 10px;
     color: #000000;
 }
@@ -105,8 +105,9 @@ a button:hover {
 }
 
 .button-red:hover{
-    background-color: #00a100;
-     border-radius: 5px;
+    background-color: #007bff;
+    border-radius: 5px;
+    outline: dashed #0049a1;
  }
 
 .button-zaloguj{
@@ -120,6 +121,7 @@ a button:hover {
     font: 15px Arial, sans-serif, bold;
 }
 .button-zaloguj:hover{
-    background-color: #00a100;
+    background-color: #007bff;
     border-radius: 5px;
+    outline: dashed #0049a1;
 }
