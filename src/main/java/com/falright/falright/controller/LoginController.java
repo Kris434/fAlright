@@ -2,13 +2,15 @@ package com.falright.falright.controller;
 
 import com.falright.falright.model.Users;
 import com.falright.falright.repository.UserRepository;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.apache.catalina.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
 
@@ -51,13 +53,6 @@ public class LoginController {
         // Jeśli użytkownik nie istnieje lub hasło jest nieprawidłowe, zwróć do formularza logowania z komunikatem
         model.addAttribute("error", "Invalid username or password. Please try again.");
         return "login";
-    }
-
-    @GetMapping("/logout")
-    public String logout(HttpSession session)
-    {
-        session.removeAttribute("loggedInUser");
-        return "home";
     }
 
     private boolean passwordMatches(String inputPassword, String hashedPassword) {

@@ -40,6 +40,18 @@
     border-radius: 5px; /* zaokrągl brzegi */
 }
 
+a button {
+    color: #fff;
+    background-color: #4395DC;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 24px;
+}
+
 a button:hover {
     text-decoration: underline;
+    background-color: rgba(255, 255, 255, 0.2); /* zmień kolor tła po najechaniu myszką */
+    border-radius: 5px; /* zaokrągl brzegi */
 }

@@ -17,11 +17,8 @@
         </a>
 
         <div class="button-container">
-            <a th:if="${session.loggedInUser == null}" href="/login">
+            <a href="/login">
                 <button class="button">Zaloguj</button>
-            </a>
-            <a th:if="${session.loggedInUser != null}" href="/logout">
-                <button class="button">Wyloguj</button>
             </a>
         </div>
     </div>

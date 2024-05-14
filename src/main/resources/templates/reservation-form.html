@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlightAlright - Rezerwacja</title>
+    <link rel="stylesheet" href="/css/reservation.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+<header th:replace="fragments/header :: header"></header>
+
+<div class="reservation-container">
+    <h1 class="reservation-title">Rezerwacja lotu</h1>
+
+    <form th:action="@{/reservation}" method="post" class="reservation-form">
+        <input type="hidden" name="flightId" value="123"> <!-- Przykładowe ID lotu -->
+        <div>
+            <label for="firstName" class="form-label">Imię:</label>
+            <input type="text" id="firstName" name="firstName" class="form-input" required>
+        </div>
+
+        <div>
+            <label for="lastName" class="form-label">Nazwisko:</label>
+            <input type="text" id="lastName" name="lastName" class="form-input" required>
+        </div>
+
+        <label for="phoneNumber" class="form-label">Numer telefonu:</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" class="form-input" required>
+
+        <button type="submit" class="submit-button">Zarezerwuj</button>
+    </form>
+</div>
+
+</body>
+</html>

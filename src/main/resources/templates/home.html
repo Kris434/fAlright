@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,11 +10,11 @@
 <header th:replace="fragments/header :: header"></header>
 
 <body>
-    <div class="logged-user" th:if="${session.loggedInUser != null}">
-        <p th:text="'Zalogowany: ' + ${session.loggedInUser.getUsername()}"></p>
+    <div class="logged-user" th:if="${user != null}">
+        <p th:text="'Zalogowany: ' + ${user.username}"></p>
     </div>
 
-    <div class="search-form" th:action="post">
+    <div class="search-form">
         <form>
             <input type="text" name="departure" placeholder="Miejsce wylotu">
             <input type="text" name="destination" placeholder="Miejsce przylotu">
