@@ -108,3 +108,18 @@ a button:hover {
     background-color: #00a100;
      border-radius: 5px;
  }
+
+.button-zaloguj{
+    padding: 15px 30px;
+    background-color: #ffffff;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    font: 15px Arial, sans-serif, bold;
+}
+.button-zaloguj:hover{
+    background-color: #00a100;
+    border-radius: 5px;
+}

@@ -21,8 +21,6 @@
             <p>Spis lotów</p>
         </a>
 
-
-
         <div class="button-container">
             <div th:if="${session.loggedInUser != null}" class="listbox">
                 <m th:text="${session.loggedInUser.getUsername()}"></m>
@@ -35,7 +33,7 @@
                 </div>
             </div>
             <a th:if="${session.loggedInUser == null}" href="/login">
-                <button class="button">Zaloguj</button>
+                <button class="button button-zaloguj">Zaloguj</button>
             </a>
             <a th:if="${session.loggedInUser != null}" href="/logout">
                 <button class="button button-red">Wyloguj</button>
