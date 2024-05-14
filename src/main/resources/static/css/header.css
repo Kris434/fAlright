@@ -55,3 +55,56 @@ a button:hover {
     background-color: rgba(255, 255, 255, 0.2); /* zmień kolor tła po najechaniu myszką */
     border-radius: 5px; /* zaokrągl brzegi */
 }
+.listbox {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 15px 30px;
+    background-color: #ffffff;
+    color: black;
+    border: none;
+    margin-right: 10px;
+    font: 15px Arial, sans-serif, bold;
+}
+
+.listbox:hover .panel {
+    display: block;
+}
+
+.panel {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #4395DC;
+    border-radius: 5px;
+    padding: 10px;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+}
+
+.panel-item {
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.panel-item:hover {
+    background-color: #4395DC;
+    border-radius: 5px;
+}
+.m {
+    font: 20px Arial, sans-serif, bold;
+    margin-bottom: 10px;
+    color: #000000;
+}
+.button-red{
+    background-color: #af0000;
+    color: white;
+}
+
+.button-red:hover{
+    background-color: #00a100;
+     border-radius: 5px;
+ }
