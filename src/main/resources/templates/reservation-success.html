@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+<header th:replace="~{fragments/header :: header}"></header>
 <h1>Rezerwacja zakończona pomyślnie!</h1>
-<!-- Wyświetl potwierdzenie rezerwacji -->
+    <div>
+        <span th:text="${session.loggedInUser.getUsername()}"></span>
+    </div>
 </body>
 </html>
