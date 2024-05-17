@@ -25,32 +25,28 @@ public class LoginController {
 
     @GetMapping("/login")
     public String getLogin() {
-        return "login"; // Zwraca widok formularza logowania
+        return "login";
     }
 
-    @PostMapping("/login-submit")
+    @PostMapping("/login")
     public String login(@RequestParam("username") String username,
                         @RequestParam("password") String password,
                         HttpSession session, Model model) {
 
-        // Znajdź użytkownika w bazie danych na podstawie nazwy użytkownika
-        Optional<Users> optionalUser = userRepository.findByUsername(username);
+        Optional<Users> optionalUser = userRepository.findUserByUsername(username);
 
-        // Sprawdź, czy użytkownik istnieje i czy hasło się zgadza
         if (optionalUser.isPresent()) {
             Users user = optionalUser.get();
-            String hashedPassword = user.getPassword(); // Pobierz zahaszowane hasło z bazy danych
+            String hashedPassword = user.getPassword();
 
-            // Porównaj zahaszowane hasło z podanym hasłem
             if (passwordMatches(password, hashedPassword)) {
-                // Ustaw atrybut sesji dla zalogowanego użytkownika
+
                 session.setAttribute("loggedInUser", user);
                 model.addAttribute("user", user);
-                return "home"; // Przekieruj do strony powitalnej po zalogowaniu
+                return "home";
             }
         }
 
-        // Jeśli użytkownik nie istnieje lub hasło jest nieprawidłowe, zwróć do formularza logowania z komunikatem
         model.addAttribute("error", "Invalid username or password. Please try again.");
         return "login";
     }
@@ -63,7 +59,7 @@ public class LoginController {
     }
 
     private boolean passwordMatches(String inputPassword, String hashedPassword) {
-        // Użyj BCryptPasswordEncoder do porównania hasła
+
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         return passwordEncoder.matches(inputPassword, hashedPassword);
     }

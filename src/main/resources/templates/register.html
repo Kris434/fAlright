@@ -8,25 +8,42 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-<form th:action="@{/register-submit}" th:object="${user}" method="post">
+<form method="post" th:action="@{/register}" th:object="${user}" >
     <div class="container">
         <div class="card">
             <div class="top-row">
-                <h1>Welcome!</h1>
-                <p>Sign up for a new account</p>
+                <h1>Załóż konto!</h1>
+                <p>Załóż nowe konto</p>
             </div>
+
             <div class="card-details">
-                <input name="username" type="text" placeholder="Enter your name">
+                <input name="email" type="text" placeholder="Wpisz e-mail" th:value="*{email}" th:errorclass="is-invalid">
+                <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="invalid-feedback"></div>
                 <i class="fa fa-user"></i>
             </div>
 
             <div class="card-details">
-                <input name="password" type="password" id="password-input" placeholder="Enter your password">
+                <input name="username" type="text" placeholder="Wpisz nazwę użytkownika" th:value="*{username}" th:errorclass="is-invalid">
+                <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="invalid-feedback"></div>
+                <i class="fa fa-user"></i>
+            </div>
+
+            <div class="card-details">
+                <input name="password" type="password" id="password-input" placeholder="Wpisz hasło" th:value="*{password}" th:errorclass="is-invalid">
+                <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="invalid-feedback"></div>
                 <i class="fa fa-lock"></i>
                 <span><small class="fa fa-eye-slash passcode"></small></span>
             </div>
-            <input type="submit" class="sign-in" value="Sign in">
-            <p class="sign-up">Already have an account?<a href="/login"> Log in</a></p>
+
+            <div class="card-details">
+                <input name="rpassword" type="password" id="repeat-password-input" placeholder="Powtórz hasło" th:value="*{rpassword}" th:errorclass="is-invalid">
+                <div th:if="${#fields.hasErrors('rpassword')}" th:errors="*{rpassword}" class="invalid-feedback"></div>
+                <i class="fa fa-lock"></i>
+                <span><small class="fa fa-eye-slash passcode"></small></span>
+            </div>
+
+            <input type="submit" class="sign-in" value="Załóż konto">
+            <p class="sign-up">Posiadasz już konto? <a href="/login"> Zaloguj się</a></p>
         </div>
     </div>
 </form>
