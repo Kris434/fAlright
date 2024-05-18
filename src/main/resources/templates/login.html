@@ -9,25 +9,32 @@
 </head>
 <body>
 
-<form th:action="@{/login-submit}" th:object="${user}" method="post">
+<form th:action="@{/login}" th:object="${user}" method="post">
     <div class="container">
         <div class="card">
             <div class="top-row">
-                <h1>Welcome again!</h1>
-                <p>Log in with your email and password</p>
+                <h1>Witaj ponownie!</h1>
+                <p>Podaj adres e-mail i hasło</p>
+
+                <div th:if="${message}" th:text="${message}"></div>
+                <div th:if="${error}" th:text="${error}" class="error-message"></div>
+
             </div>
+
             <div class="card-details">
-                <input name="username" type="text" placeholder="Enter your name">
+                <input name="username" type="text" placeholder="Wpisz e-mail">
                 <i class="fa fa-envelope"></i>
             </div>
+
             <div class="card-details">
-                <input name="password" type="password" id="password-input" placeholder="Enter your password">
+                <input name="password" type="password" id="password-input" placeholder="Wpisz hasło">
                 <i class="fa fa-lock"></i>
                 <span><small class="fa fa-eye-slash passcode"></small></span>
             </div>
-            <p class="forget">Forgot your password?</p>
-            <input type="submit" class="sign-in" value="Login">
-            <p class="sign-up">Don't have an account?<a href="/register"> Sign up</a></p>
+
+            <p class="forget">Nie pamiętasz hasła?</p>
+            <input type="submit" class="sign-in" value="Zaloguj się">
+            <p class="sign-up">Nie masz konta? <a href="/register"> Załóż je</a></p>
         </div>
     </div>
 </form>

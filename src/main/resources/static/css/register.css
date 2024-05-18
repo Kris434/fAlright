@@ -117,3 +117,10 @@
 .warning {
     border: 2px solid red !important;
 }
+
+.invalid-feedback {
+    color: red;
+    font-size: 14px;
+    text-align: left;
+    display: block;
+}

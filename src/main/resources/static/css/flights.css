@@ -1,11 +1,9 @@
-/* Resetowanie stylów dla wszystkich elementów */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Styl dla całego body */
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
@@ -45,6 +43,7 @@ a:hover {
     margin-right: 10px;
     font: 15px Arial, sans-serif, bold;
 }
+
 .flights {
     max-width: 1200px;
     padding: 20px;
@@ -74,6 +73,7 @@ a:hover {
 
 .flight-info p {
     margin: 5px 0;
+    color: #fff;
 }
 
 .flight form button {
