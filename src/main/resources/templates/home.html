@@ -12,14 +12,17 @@
 <body>
 
     <div class="search-form">
-        <form>
+        <form th:action="@{/flights/search}" th:method="get">
             <input type="text" name="departure" placeholder="Miejsce wylotu">
+            <input type="date" name="departure_date" placeholder="Data wylotu"/>
             <input type="text" name="destination" placeholder="Miejsce przylotu">
-            <input type="date" placeholder="Data przylotu"/>
-            <input type="date" placeholder="Data wylotu"/>
-            <input type="number" name="passengers" placeholder="🙍‍♂️" min="1" max="10">
+            <input type="date" name="arrival_date" placeholder="Data przylotu"/>
             <button type="submit">Szukaj</button>
         </form>
+    </div>
+
+    <div th:if="${message}" class="message">
+        <p th:text="${message}"></p>
     </div>
 </body>
 </html>
