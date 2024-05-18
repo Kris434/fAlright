@@ -14,7 +14,7 @@ import org.hibernate.validator.constraints.Length;
 @Table(name = "users")
 public class Users {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer user_id;
 
     @NotBlank(message = "Podaj E-mail!")
@@ -35,5 +35,6 @@ public class Users {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public enum Role { LOGGED, EMPLOYEE, ADMIN }
+    public enum Role { USER, EMPLOYEE, ADMIN }
+
 }

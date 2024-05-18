@@ -46,7 +46,7 @@ public class UserService {
     public Users registerUser(Users user) {
         String password = passwordEncoder.encode(user.getPassword());
         user.setPassword(password);
-        user.setRole(Users.Role.LOGGED);
+        user.setRole(Users.Role.USER);
         return saveUser(user);
     }
 }
