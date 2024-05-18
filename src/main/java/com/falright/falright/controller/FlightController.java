@@ -35,7 +35,7 @@ public class FlightController {
         return "flights";
     }
 
-    @GetMapping("/add")
+    @GetMapping("/add/{aircraft_id}")
     public String addFlight(Model model, @PathVariable("aircraft_id") Integer airId)
     {
         Optional<Aircrafts> oAircraft = aircraftRepository.findById(airId);
