@@ -4,16 +4,27 @@
     box-sizing: border-box;
 }
 
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    text-align: center;
+    padding: 20px;
+    background-image: url('https://static.vecteezy.com/system/resources/previews/002/468/358/original/flat-airplane-icon-on-blue-background-free-vector.jpg'); /* Dodaj ścieżkę do obrazu */
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+    color: #333;
+}
+
 .container {
-    min-height: 100vh;
-    background-color: #e1e3ef;
+    min-height: 92vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .card {
-    height: 480px;
+    height: 500px;
     width: 320px;
     border-radius: 10px;
     background-color: #68BBE3;
