@@ -1,3 +1,5 @@
+@import url('https://unpkg.com/css.gg@2.0.0/icons/css/airplane.css');
+
 .header {
     position: fixed;
     background-color: #4395DC;
@@ -26,17 +28,17 @@
 
 .home-link,
 .flights-link {
-    text-decoration: none; /* usuń domyślne podkreślenie */
-    color: #fff; /* zmień kolor na biały */
-    display: flex; /* użyj flexbox */
-    align-items: center; /* wyśrodkuj w pionie */
-    padding: 10px 20px; /* dodaj odstępy wokół odnośnika */
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
 }
 
 .home-link:hover,
 .flights-link:hover {
-    background-color: rgba(255, 255, 255, 0.2); /* zmień kolor tła po najechaniu myszką */
-    border-radius: 5px; /* zaokrągl brzegi */
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
 }
 
 a button {
@@ -51,8 +53,8 @@ a button {
 
 a button:hover {
     text-decoration: underline;
-    background-color: rgba(255, 255, 255, 0.2); /* zmień kolor tła po najechaniu myszką */
-    border-radius: 5px; /* zaokrągl brzegi */
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
 }
 .listbox {
     position: relative;
@@ -134,4 +136,12 @@ span {
 
 .logo {
     height: 60px
+}
+
+.listbox {
+    display: none;
+}
+
+.gg-airplane {
+    margin: 5px;
 }
