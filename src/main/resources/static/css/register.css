@@ -97,9 +97,9 @@ body {
     height: 60px;
     width: 100%;
     font-size: 17px;
-    color: #4395DC;
+    color: #fff;
     border-radius: 10px;
-    background-color: #fcdba8;
+    background-color: #5a77e6;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.5s;
@@ -107,7 +107,7 @@ body {
 }
 
 .sign-in:hover {
-    background-color: #b7a486;
+    background-color: #4395DC;
 }
 
 .sign-up {
@@ -122,7 +122,7 @@ body {
 }
 
 .sign-up a:hover {
-    color: #f4d5a8;
+    color: #4395DC;
 }
 
 .warning {
