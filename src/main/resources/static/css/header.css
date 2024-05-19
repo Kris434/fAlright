@@ -11,7 +11,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -60,7 +59,7 @@ a button:hover {
     display: inline-block;
     cursor: pointer;
     border-radius: 5px;
-    padding: 15px 30px;
+    padding: 15px 45px;
     background-color: #ffffff;
     color: black;
     border: none;
@@ -99,17 +98,6 @@ span {
     margin-bottom: 10px;
     color: #000000;
 }
-.button-red{
-    background-color: #af0000;
-    color: white;
-}
-
-.button-red:hover{
-    background-color: #007bff;
-    border-radius: 5px;
-    outline: dashed #0049a1;
- }
-
 .button-zaloguj{
     padding: 15px 30px;
     background-color: #ffffff;
@@ -124,4 +112,26 @@ span {
     background-color: #007bff;
     border-radius: 5px;
     outline: dashed #0049a1;
+}
+.logout-link .panel-item {
+    background-color: #f0f0f0;
+    color: #000;
+}
+.logout-link:hover .panel-item {
+    background-color: #9d0000;
+    color: #fff;
+    border-color: #9d0000;
+}
+.logout-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 60px
 }
