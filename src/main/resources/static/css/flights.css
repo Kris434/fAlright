@@ -6,13 +6,14 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
     text-align: center;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    display: flex;
     padding: 20px;
-    background-image: url('https://static.vecteezy.com/system/resources/previews/002/468/358/original/flat-airplane-icon-on-blue-background-free-vector.jpg'); /* Dodaj ścieżkę do obrazu */
-    background-size: cover;
-    background-position: top;
-    background-repeat: no-repeat;
+    background-image: url("https://www.shutterstock.com/image-vector/airplane-flight-pattern-white-background-600nw-1764763985.jpg");
     color: #333;
 }
 
@@ -49,7 +50,7 @@ a:hover {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 100px;
     max-width: 1200px;
 }
 
@@ -92,14 +93,7 @@ a:hover {
     background-color: #4395DC;
 }
 
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f2f2f2;
-}
+
 
 .logged-user {
     position: absolute;

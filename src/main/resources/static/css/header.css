@@ -111,9 +111,10 @@ span {
     font: 15px Arial, sans-serif, bold;
 }
 .button-zaloguj:hover{
-    background-color: #007bff;
+    background-color: rgb(28,90,163);
     border-radius: 5px;
-    outline: dashed #0049a1;
+    color: white;
+    outline: 2px solid white;
 }
 .logout-link .panel-item {
     background-color: #f0f0f0;
