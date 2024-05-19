@@ -15,7 +15,7 @@
 <div class="reservation-container">
     <h1 class="reservation-title">Rezerwacja lotu</h1>
 
-    <form th:action="@{/reservation}" method="post" class="reservation-form">
+    <form th:action="@{/personal-info}" method="post" class="reservation-form">
         <input type="hidden" name="flightId" value="123"> <!-- Przykładowe ID lotu -->
         <div>
             <label for="firstName" class="form-label">Imię:</label>
@@ -27,8 +27,30 @@
             <input type="text" id="lastName" name="lastName" class="form-input" required>
         </div>
 
-        <label for="phoneNumber" class="form-label">Numer telefonu:</label>
-        <input type="tel" id="phoneNumber" name="phoneNumber" class="form-input" required>
+        <div>
+            <label for="email" class="form-label">Adres E-mail:</label>
+            <input type="email" id="email" name="email" class="form-input" required>
+        </div>
+
+        <div>
+            <label for="phoneNumber" class="form-label">Numer telefonu:</label>
+            <input type="tel" id="phoneNumber" name="phoneNumber" class="form-input" required>
+        </div>
+
+        <div>
+            <label for="address" class="form-label">Adres:</label>
+            <input type="text" id="address" name="address" class="form-input" required>
+        </div>
+
+        <div>
+            <label for="postCode" class="form-label">Kod pocztowy:</label>
+            <input type="text" id="postCode" name="postCode" class="form-input" required>
+        </div>
+
+        <div>
+            <label for="city" class="form-label">Miasto:</label>
+            <input type="text" id="city" name="city" class="form-input" required>
+        </div>
 
         <button type="submit" class="submit-button">Zarezerwuj</button>
     </form>
