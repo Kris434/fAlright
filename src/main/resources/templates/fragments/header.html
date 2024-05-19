@@ -13,9 +13,11 @@
 <body>
 <header class="header">
     <div class="header-content">
-
         <a href="/" class="home-link">
-            <p>FlightAlright</p>
+            <div class="logo-container">
+                <img src="https://tse2.mm.bing.net/th/id/OIG1.hk5gzcFTpG0PLZ3n9xV6?pid=ImgGn" alt="" class="logo">
+            </div>
+
         </a>
         <a href="/flights" class="flights-link">
             <p>Spis lotów</p>
@@ -27,14 +29,15 @@
                 <div class="panel">
                     <div class="panel-item">Dane użytkownika</div>
                     <div class="panel-item">Historia Rezerwacji</div>
+                    <a href = "/logout" class="logout-link">
+                    <div class = "panel-item">Wyloguj</div>
+                    </a>
                 </div>
             </div>
             <a th:if="${session.loggedInUser == null}" href="/login">
                 <button class="button button-zaloguj">Zaloguj</button>
             </a>
-            <a th:if="${session.loggedInUser != null}" href="/logout">
-                <button class="button button-red">Wyloguj</button>
-            </a>
+
         </div>
     </div>
 </header>
