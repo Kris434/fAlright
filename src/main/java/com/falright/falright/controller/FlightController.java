@@ -57,6 +57,7 @@ public class FlightController {
 
         if (flights.isEmpty()) {
             model.addAttribute("message", "Nie znaleziono lotów spełniających podane kryteria.");
+            return "home";
         } else {
             model.addAttribute("flights", flights);
         }
