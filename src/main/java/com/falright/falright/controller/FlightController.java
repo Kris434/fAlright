@@ -6,11 +6,14 @@ import com.falright.falright.model.Reservations;
 import com.falright.falright.repository.AircraftRepository;
 import com.falright.falright.repository.FlightRepository;
 import com.falright.falright.repository.ReservationRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -36,12 +39,23 @@ public class FlightController {
     }
 
     @GetMapping("/add/{aircraft_id}")
-    public String addFlight(Model model, @PathVariable("aircraft_id") Integer airId)
+    public String addFlight(HttpSession session, Model model, @PathVariable("aircraft_id") Integer airId)
     {
         Optional<Aircrafts> oAircraft = aircraftRepository.findById(airId);
-        Aircrafts aircraft = oAircraft.get();
+        Aircrafts aircraft = new Aircrafts();
+
+        if(oAircraft.isPresent())
+        {
+            aircraft = oAircraft.get();
+        }
 
         Flights flight = new Flights();
+
+        flight.setAircrafts_id(aircraft);
+
+        flightRepository.save(flight);
+
+        List<Reservations> reservationsList = new ArrayList<>();
 
         for(int i = 0; i < aircraft.getCapacity(); i++)
         {
@@ -49,12 +63,13 @@ public class FlightController {
 
             r.setSeat_number(i + 1);
             r.setFlights_id(flight);
-            r.setStatus(true);
+            r.setStatus(false);
 
-            model.addAttribute("reservationsForFlight", r);
-
+            reservationsList.add(r);
             reservationRepository.save(r);
         }
+
+        session.setAttribute("reservationList", reservationsList);
 
         return "home";
     }
