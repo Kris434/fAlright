@@ -168,3 +168,7 @@ body {
     font-weight: bold;
     margin-top: 10px;
 }
+
+h1 {
+    margin: 5px;
+}
