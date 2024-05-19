@@ -1,19 +1,35 @@
+@import url('https://unpkg.com/css.gg@2.0.0/icons/css/user.css');
+@import url('https://unpkg.com/css.gg@2.0.0/icons/css/lock.css');
+@import url('https://unpkg.com/css.gg@2.0.0/icons/css/eye.css');
+@import url('https://unpkg.com/css.gg@2.0.0/icons/css/mail.css');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    text-align: center;
+    padding: 20px;
+    background-image: url('https://static.vecteezy.com/system/resources/previews/002/468/358/original/flat-airplane-icon-on-blue-background-free-vector.jpg'); /* Dodaj ścieżkę do obrazu */
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+    color: #333;
+}
+
 .container {
-    min-height: 100vh;
-    background-color: #e1e3ef;
+    min-height: 92vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .card {
-    height: 480px;
+    height: 550px;
     width: 320px;
     border-radius: 10px;
     background-color: #68BBE3;
@@ -31,8 +47,43 @@
 
 .card-details {
     position: relative;
-    display: flex;
-    padding-bottom: 20px;
+    display: -moz-stack;
+    padding-bottom: 10px;
+}
+
+.card-details i.gg-mail {
+    position: absolute;
+    left: 14px;
+    top: 18px;
+    color: #ffffff;
+    font-size: 20px;
+    justify-content: center;
+}
+
+.card-details i.gg-user {
+    position: absolute;
+    left: 18px;
+    top: 16px;
+    color: #ffffff;
+    font-size: 20px;
+    justify-content: center;
+}
+
+.card-details i.gg-lock {
+    position: absolute;
+    left: 18px;
+    top: 25px;
+    color: #ffffff;
+    font-size: 20px;
+    justify-content: center;
+}
+
+.card-details i.gg-eye {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    color: #ffffff;
+    justify-content: center;
 }
 
 .card-details input {
@@ -48,6 +99,7 @@
     border-radius: 10px;
     outline: none;
     border: none;
+    display: block;
 }
 
 .card-details i {
@@ -62,7 +114,6 @@
     position: absolute;
     width: 20px;
     height: 20px;
-    background-color: #fff;
     border-radius: 50%;
     font-size: 10px;
     color: #000;
@@ -86,9 +137,9 @@
     height: 60px;
     width: 100%;
     font-size: 17px;
-    color: #4395DC;
+    color: #fff;
     border-radius: 10px;
-    background-color: #fcdba8;
+    background-color: #5a77e6;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.5s;
@@ -96,7 +147,7 @@
 }
 
 .sign-in:hover {
-    background-color: #b7a486;
+    background-color: #4395DC;
 }
 
 .sign-up {
@@ -111,9 +162,18 @@
 }
 
 .sign-up a:hover {
-    color: #f4d5a8;
+    color: #4395DC;
 }
 
 .warning {
     border: 2px solid red !important;
+}
+
+.invalid-feedback {
+    color: red;
+    font-size: 14px;
+    text-align: left;
+    margin-top: 5px;
+    display: block;
+    clear: both;
 }

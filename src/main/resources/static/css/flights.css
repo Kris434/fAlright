@@ -1,24 +1,23 @@
-/* Resetowanie stylów dla wszystkich elementów */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Styl dla całego body */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
     text-align: center;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    display: flex;
     padding: 20px;
-    background-image: url('https://static.vecteezy.com/system/resources/previews/002/468/358/original/flat-airplane-icon-on-blue-background-free-vector.jpg'); /* Dodaj ścieżkę do obrazu */
-    background-size: cover;
-    background-position: top;
-    background-repeat: no-repeat;
+    background-image: url("https://www.shutterstock.com/image-vector/airplane-flight-pattern-white-background-600nw-1764763985.jpg");
     color: #333;
 }
 
-p {
+.info {
     font-size: 18px;
     line-height: 1.6;
     margin-bottom: 10px;
@@ -45,38 +44,40 @@ a:hover {
     margin-right: 10px;
     font: 15px Arial, sans-serif, bold;
 }
-.flights {
+
+.flights-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
     max-width: 1200px;
-    padding: 20px;
-    margin: 50px;
-    border: 5px solid #68BBE3;
-    border-radius: 5px;
+}
+
+.ico {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #4395DC
 }
 
-.flights-container {
-    flex-direction: column;
-    margin-top: 300px;
-}
-
-.flight {
-    width: calc(33.33% - 20px);
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.flights {
+    flex: 1 1 30%;
     padding: 20px;
     margin: 10px;
-    background-color: #fff;
-    box-sizing: border-box;
+    border: 5px solid #68BBE3;
+    border-radius: 5px;
+    background-color: #4395DC;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.flight-info p {
+.flight-info div, .flight-info div strong, .flight-info div span {
     margin: 5px 0;
+    color: #fff;
 }
 
-.flight form button {
+.flight-info form button {
     margin-top: 10px;
     padding: 10px 20px;
     background-color: #68BBE3;
@@ -88,18 +89,10 @@ a:hover {
     transition: background-color 0.3s ease;
 }
 
-.flight form button:hover {
+.flight-info form button:hover {
     background-color: #4395DC;
 }
 
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f2f2f2;
-}
 
 
 .logged-user {
@@ -134,5 +127,6 @@ a:hover {
     background-color: #007bff;
 }
 
-
-
+.flight-info form button span {
+    color: #fff;
+}

@@ -10,19 +10,18 @@
 <header th:replace="~{fragments/header :: header}"></header>
 
 <body>
-    <div class="logged-user" th:if="${session.loggedInUser != null}">
-        <p th:text="'Zalogowany: ' + ${session.loggedInUser.getUsername()}"></p>
-    </div>
-
     <div class="search-form">
-        <form>
-            <input type="text" name="departure" placeholder="Miejsce wylotu">
-            <input type="text" name="destination" placeholder="Miejsce przylotu">
-            <input type="date" placeholder="Data przylotu"/>
-            <input type="date" placeholder="Data wylotu"/>
-            <input type="number" name="passengers" placeholder="🙍‍♂️" min="1" max="10">
+        <form th:action="@{/flights/search}" th:method="get">
+            <input type="text" name="departure" placeholder="Miejsce wylotu" required>
+            <input type="date" name="departure_date" placeholder="Data wylotu"/>
+            <input type="text" name="destination" placeholder="Miejsce przylotu" required>
+            <input type="date" name="arrival_date" placeholder="Data przylotu"/>
             <button type="submit">Szukaj</button>
         </form>
+
+        <div th:class="message-container" th:if="${message}" class="message">
+            <p th:text="${message}"></p>
+        </div>
     </div>
 </body>
 </html>

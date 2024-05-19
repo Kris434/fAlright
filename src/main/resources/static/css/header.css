@@ -1,3 +1,5 @@
+@import url('https://unpkg.com/css.gg@2.0.0/icons/css/airplane.css');
+
 .header {
     position: fixed;
     background-color: #4395DC;
@@ -11,7 +13,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -27,17 +28,17 @@
 
 .home-link,
 .flights-link {
-    text-decoration: none; /* usuń domyślne podkreślenie */
-    color: #fff; /* zmień kolor na biały */
-    display: flex; /* użyj flexbox */
-    align-items: center; /* wyśrodkuj w pionie */
-    padding: 10px 20px; /* dodaj odstępy wokół odnośnika */
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
 }
 
 .home-link:hover,
 .flights-link:hover {
-    background-color: rgba(255, 255, 255, 0.2); /* zmień kolor tła po najechaniu myszką */
-    border-radius: 5px; /* zaokrągl brzegi */
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
 }
 
 a button {
@@ -52,15 +53,15 @@ a button {
 
 a button:hover {
     text-decoration: underline;
-    background-color: rgba(255, 255, 255, 0.2); /* zmień kolor tła po najechaniu myszką */
-    border-radius: 5px; /* zaokrągl brzegi */
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
 }
 .listbox {
     position: relative;
     display: inline-block;
     cursor: pointer;
     border-radius: 5px;
-    padding: 15px 30px;
+    padding: 15px 45px;
     background-color: #ffffff;
     color: black;
     border: none;
@@ -99,17 +100,6 @@ span {
     margin-bottom: 10px;
     color: #000000;
 }
-.button-red{
-    background-color: #af0000;
-    color: white;
-}
-
-.button-red:hover{
-    background-color: #007bff;
-    border-radius: 5px;
-    outline: dashed #0049a1;
- }
-
 .button-zaloguj{
     padding: 15px 30px;
     background-color: #ffffff;
@@ -121,7 +111,38 @@ span {
     font: 15px Arial, sans-serif, bold;
 }
 .button-zaloguj:hover{
-    background-color: #007bff;
+    background-color: rgb(28,90,163);
     border-radius: 5px;
-    outline: dashed #0049a1;
+    color: white;
+    outline: 2px solid white;
+}
+.logout-link .panel-item {
+    background-color: #f0f0f0;
+    color: #000;
+}
+.logout-link:hover .panel-item {
+    background-color: #9d0000;
+    color: #fff;
+    border-color: #9d0000;
+}
+.logout-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 60px
+}
+
+.listbox {
+    display: none;
+}
+
+.gg-airplane {
+    margin: 5px;
 }

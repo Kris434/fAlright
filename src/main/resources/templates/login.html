@@ -5,31 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="/css/login.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
-<form th:action="@{/login-submit}" th:object="${user}" method="post">
+<form th:action="@{/login}" th:object="${user}" method="post">
     <div class="container">
         <div class="card">
             <div class="top-row">
-                <h1>Welcome again!</h1>
-                <p>Log in with your email and password</p>
+                <h1>Witaj ponownie!</h1>
+                <p>Podaj login i hasło</p>
+
+                <div th:if="${message}" th:text="${message}"></div>
+                <div th:if="${error}" th:text="${error}" class="error-message"></div>
+
             </div>
+
             <div class="card-details">
-                <input name="username" type="text" placeholder="Enter your name">
-                <i class="fa fa-envelope"></i>
+                <i class="gg-user"></i>
+                <input name="username" type="text" placeholder="Wpisz nazwę użytkownika">
             </div>
+
             <div class="card-details">
-                <input name="password" type="password" id="password-input" placeholder="Enter your password">
-                <i class="fa fa-lock"></i>
-                <span><small class="fa fa-eye-slash passcode"></small></span>
+                <i class="gg-lock"></i>
+                <input name="password" type="password" id="password-input" placeholder="Wpisz hasło">
+                <span id="toggle-password"><i class="gg-eye"></i></span>
             </div>
-            <p class="forget">Forgot your password?</p>
-            <input type="submit" class="sign-in" value="Login">
-            <p class="sign-up">Don't have an account?<a href="/register"> Sign up</a></p>
+
+            <p class="forget">Nie pamiętasz hasła?</p>
+            <input type="submit" class="sign-in" value="Zaloguj się">
+            <p class="sign-up">Nie masz konta? <a href="/register"> Załóż je</a></p>
         </div>
     </div>
 </form>
+<script src="/js/showPassword.js"></script>
 </body>
 </html>

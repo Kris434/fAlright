@@ -5,30 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
     <link rel="stylesheet" href="/css/register.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-<form th:action="@{/register-submit}" th:object="${user}" method="post">
+<form method="post" th:action="@{/register}" th:object="${user}" >
     <div class="container">
         <div class="card">
             <div class="top-row">
-                <h1>Welcome!</h1>
-                <p>Sign up for a new account</p>
-            </div>
-            <div class="card-details">
-                <input name="username" type="text" placeholder="Enter your name">
-                <i class="fa fa-user"></i>
+                <h1>Załóż konto!</h1>
+                <p>Załóż nowe konto</p>
             </div>
 
             <div class="card-details">
-                <input name="password" type="password" id="password-input" placeholder="Enter your password">
-                <i class="fa fa-lock"></i>
-                <span><small class="fa fa-eye-slash passcode"></small></span>
+                <i class="gg-mail"></i>
+                <input name="email" type="text" placeholder="Wpisz e-mail" th:value="*{email}" th:errorclass="is-invalid">
+                <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="invalid-feedback"></div>
             </div>
-            <input type="submit" class="sign-in" value="Sign in">
-            <p class="sign-up">Already have an account?<a href="/login"> Log in</a></p>
+
+            <div class="card-details">
+                <i class="gg-user"></i>
+                <input name="username" type="text" placeholder="Wpisz nazwę użytkownika" th:value="*{username}" th:errorclass="is-invalid">
+                <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="invalid-feedback"></div>
+            </div>
+
+            <div class="card-details">
+                <i class="gg-lock"></i>
+                <input name="password" type="password" id="password-input" placeholder="Wpisz hasło" th:value="*{password}" th:errorclass="is-invalid">
+                <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="invalid-feedback"></div>
+                <span id="toggle-password"><i class="gg-eye"></i></span>
+            </div>
+
+            <div class="card-details">
+                <i class="gg-lock"></i>
+                <input name="rpassword" type="password" id="repeat-password-input" placeholder="Powtórz hasło" th:value="*{rpassword}" th:errorclass="is-invalid">
+                <div th:if="${#fields.hasErrors('rpassword')}" th:errors="*{rpassword}" class="invalid-feedback"></div>
+                <span id="toggle-rpassword"><i class="gg-eye"></i></span>
+            </div>
+
+            <input type="submit" class="sign-in" value="Załóż konto">
+            <p class="sign-up">Posiadasz już konto? <a href="/login"> Zaloguj się</a></p>
         </div>
     </div>
 </form>
+<script src="/js/showPassword.js"></script>
 </body>
 </html>

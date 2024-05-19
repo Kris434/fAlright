@@ -11,23 +11,21 @@
 <header th:replace="~{fragments/header :: header}"></header>
 
 <body>
-<div class="logged-user" th:if="${session.loggedInUser != null}">
-    <p th:text="'Zalogowany: ' + ${session.loggedInUser.getUsername()}"></p>
-</div>
 
     <div class="flights-container">
         <div class="flights" th:each="flight : ${flights}">
             <div  class="flight-info">
-                <p>
+                <div class="info">
                     <strong>
                         <span th:text="${#temporals.format(flight.departure_time, 'yyyy-MM-dd HH:mm')}"></span>
                     </strong>
-                    <span th:text="${flight.departure_point}"></span> &rarr;
+                    <span th:text="${flight.departure_point}"></span>
+                <p class="ico"><i class="gg-airplane"></i></p>
                     <strong>
                         <span th:text="${#temporals.format(flight.arrival_time, 'yyyy-MM-dd HH:mm')}"></span>
                     </strong>
                     <span th:text="${flight.destination}"></span>
-                </p>
+                </div>
 
                 <form method="post" th:action="@{/reservation(flightId=${flight.flight_id})}">
                     <input type="hidden" name="flightId" th:value="${flight.flight_id}"/>
@@ -36,5 +34,6 @@
             </div>
         </div>
     </div>
+
 </body>
 </html>
