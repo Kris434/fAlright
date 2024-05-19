@@ -1,6 +1,7 @@
 @import url('https://unpkg.com/css.gg@2.0.0/icons/css/user.css');
 @import url('https://unpkg.com/css.gg@2.0.0/icons/css/lock.css');
 @import url('https://unpkg.com/css.gg@2.0.0/icons/css/eye.css');
+@import url('https://unpkg.com/css.gg@2.0.0/icons/css/mail.css');
 
 * {
     margin: 0;
@@ -28,7 +29,7 @@ body {
 }
 
 .card {
-    height: 500px;
+    height: 600px;
     width: 320px;
     border-radius: 10px;
     background-color: #68BBE3;
@@ -46,8 +47,43 @@ body {
 
 .card-details {
     position: relative;
-    display: flex;
+    display: -moz-stack;
     padding-bottom: 20px;
+}
+
+.card-details i.gg-mail {
+    position: absolute;
+    left: 14px;
+    top: 18px;
+    color: #ffffff;
+    font-size: 20px;
+    justify-content: center;
+}
+
+.card-details i.gg-user {
+    position: absolute;
+    left: 18px;
+    top: 16px;
+    color: #ffffff;
+    font-size: 20px;
+    justify-content: center;
+}
+
+.card-details i.gg-lock {
+    position: absolute;
+    left: 18px;
+    top: 25px;
+    color: #ffffff;
+    font-size: 20px;
+    justify-content: center;
+}
+
+.card-details i.gg-eye {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    color: #ffffff;
+    justify-content: center;
 }
 
 .card-details input {
@@ -63,6 +99,7 @@ body {
     border-radius: 10px;
     outline: none;
     border: none;
+    display: block;
 }
 
 .card-details i {
@@ -77,7 +114,6 @@ body {
     position: absolute;
     width: 20px;
     height: 20px;
-    background-color: #fff;
     border-radius: 50%;
     font-size: 10px;
     color: #000;
@@ -136,6 +172,8 @@ body {
 .invalid-feedback {
     color: red;
     font-size: 14px;
-    text-align: left;
+    text-align: center;
+    margin-top: 5px;
     display: block;
+    clear: both;
 }

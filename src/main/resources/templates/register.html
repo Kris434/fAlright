@@ -16,29 +16,29 @@
             </div>
 
             <div class="card-details">
+                <i class="gg-mail"></i>
                 <input name="email" type="text" placeholder="Wpisz e-mail" th:value="*{email}" th:errorclass="is-invalid">
                 <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="invalid-feedback"></div>
-                <i class="fa fa-user"></i>
             </div>
 
             <div class="card-details">
+                <i class="gg-user"></i>
                 <input name="username" type="text" placeholder="Wpisz nazwę użytkownika" th:value="*{username}" th:errorclass="is-invalid">
                 <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="invalid-feedback"></div>
-                <i class="fa fa-user"></i>
             </div>
 
             <div class="card-details">
+                <i class="gg-lock"></i>
                 <input name="password" type="password" id="password-input" placeholder="Wpisz hasło" th:value="*{password}" th:errorclass="is-invalid">
                 <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="invalid-feedback"></div>
-                <i class="fa fa-lock"></i>
-                <span><small class="fa fa-eye-slash passcode"></small></span>
+                <span><i class="gg-eye"></i></span>
             </div>
 
             <div class="card-details">
+                <i class="gg-lock"></i>
                 <input name="rpassword" type="password" id="repeat-password-input" placeholder="Powtórz hasło" th:value="*{rpassword}" th:errorclass="is-invalid">
                 <div th:if="${#fields.hasErrors('rpassword')}" th:errors="*{rpassword}" class="invalid-feedback"></div>
-                <i class="fa fa-lock"></i>
-                <span><small class="fa fa-eye-slash passcode"></small></span>
+                <span><i class="gg-eye"></i></span>
             </div>
 
             <input type="submit" class="sign-in" value="Załóż konto">
