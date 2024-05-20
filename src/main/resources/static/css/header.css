@@ -115,7 +115,7 @@ a button:hover {
     background-color: #007bff;
     border-radius: 5px;
 }
-.panel-item:visited{
+a.panel-item:visited{
     color: black;
     text-decoration: none;
 }
@@ -157,10 +157,6 @@ span {
 .logo-container {
     display: flex;
     align-items: center;
-}
-
-.logo {
-    height: 60px
 }
 
 .gg-airplane {
