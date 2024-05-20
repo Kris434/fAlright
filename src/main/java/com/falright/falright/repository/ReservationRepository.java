@@ -3,6 +3,7 @@ package com.falright.falright.repository;
 import com.falright.falright.model.Flights;
 import com.falright.falright.model.Passengers;
 import com.falright.falright.model.Reservations;
+import com.falright.falright.model.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -14,6 +15,9 @@ public interface ReservationRepository extends JpaRepository<Reservations, Integ
 
     @Query(value = "SELECT r FROM Reservations r WHERE r.passengers_id = ?1")
     Reservations findByPassengerId(final Passengers passengers);
+
+    @Query(value = "SELECT r FROM Reservations r JOIN Passengers p ON r.passengers_id.passenger_id = p.passenger_id JOIN Users u ON p.users_id.user_id = u.user_id WHERE u.user_id = ?1")
+    List<Reservations> findByLoggedUser(final Integer userId);
 
     @Query(value = "SELECT r FROM Reservations r WHERE r.seat_number = ?1 AND r.flights_id = ?2")
     Reservations findBySeatAndFlight(final Integer seat, final Flights flight);

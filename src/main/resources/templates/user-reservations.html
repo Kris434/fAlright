@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlightAlright</title>
+    <link rel="stylesheet" href="/css/flights.css">
+    <link rel="stylesheet" href="/css/header.css">
+</head>
+
+<header th:replace="~{fragments/header :: header}"></header>
+
+<body>
+
+<div class="flights-container">
+    <div class="flights" th:each="reservation : ${userReservations}">
+        <div  class="flight-info">
+            <div class="info">
+                <strong>
+                    <span th:text="${#temporals.format(reservation.getFlights_id().getDeparture_time(), 'yyyy-MM-dd HH:mm')}"></span>
+                </strong>
+                <span th:text="${reservation.getFlights_id().getDeparture_point()}"></span>
+                <p class="ico"><i class="gg-airplane"></i></p>
+                <strong>
+                    <span th:text="${#temporals.format(reservation.getFlights_id().getArrival_time(), 'yyyy-MM-dd HH:mm')}"></span>
+                </strong>
+                <span th:text="${reservation.getFlights_id().getDestination()}"></span>
+                <h5>Dane użytkownika</h5>
+                <span th:text="${reservation.getPassengers_id().getName()} + ' ' + ${reservation.getPassengers_id().getSurname()}"></span>
+                <p th:text="'Email: ' + ${reservation.getPassengers_id().getEmail()}"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

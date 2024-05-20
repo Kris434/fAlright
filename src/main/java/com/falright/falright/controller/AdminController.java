@@ -1,7 +1,9 @@
 package com.falright.falright.controller;
 
 import com.falright.falright.model.Aircrafts;
+import com.falright.falright.model.Users;
 import com.falright.falright.repository.AircraftRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,12 +23,21 @@ public class AdminController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/admin")
-    public String adminAccess(Model model)
+    public String adminAccess(Model model, HttpSession session)
     {
-        List<Aircrafts> aircraftsList = (List<Aircrafts>) aircraftRepository.findAll();
+        Users user = (Users) session.getAttribute("loggedInUser");
 
-        model.addAttribute("aircrafts", aircraftsList);
+        if(user != null && user.getRole() == Users.Role.ADMIN)
+        {
+            List<Aircrafts> aircraftsList = (List<Aircrafts>) aircraftRepository.findAll();
 
-        return "admin";
+            model.addAttribute("aircrafts", aircraftsList);
+
+            return "admin";
+        }
+        else
+        {
+            return "home";
+        }
     }
 }

@@ -25,13 +25,11 @@ public class ReservationController {
     private final FlightRepository flightsRepository;
     private final PassengersRepository passengersRepository;
     private final ReservationRepository reservationRepository;
-    private final JdbcTemplate jdbcTemplate;
 
-    public ReservationController(FlightRepository flightsRepository, PassengersRepository passengersRepository, ReservationRepository reservationRepository, JdbcTemplate template) {
+    public ReservationController(FlightRepository flightsRepository, PassengersRepository passengersRepository, ReservationRepository reservationRepository) {
         this.flightsRepository = flightsRepository;
         this.passengersRepository = passengersRepository;
         this.reservationRepository = reservationRepository;
-        this.jdbcTemplate = template;
     }
 
     @PostMapping("/reservation")
@@ -92,7 +90,18 @@ public class ReservationController {
         reservation.setPassengers_id(passenger);
         reservationRepository.save(reservation);
 
-
         return "reservation-success";
+    }
+
+    @GetMapping("/your-reservations")
+    public String showReservationsToUser(HttpSession session, Model model)
+    {
+        Users user = (Users) session.getAttribute("loggedInUser");
+
+        List<Reservations> reservations = (List<Reservations>) reservationRepository.findByLoggedUser(user.getUser_id());
+
+        model.addAttribute("userReservations", reservations);
+
+        return "user-reservations";
     }
 }
