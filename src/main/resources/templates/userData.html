@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profil Użytkownika</title>
+</head>
+<body>
+<header class="header">
+    <div class="header-content">
+        <a href="/" class="home-link">
+            <div class="logo-container">
+                <i class="gg-airplane"></i>
+                <p>FlightAlright</p>
+            </div>
+        </a>
+        <a href="/flights" class="flights-link">
+            <p>Spis lotów</p>
+        </a>
+    </div>
+</header>
+<main>
+    <h1>Profil Użytkownika</h1>
+    <div>
+        <p><strong>Nazwa użytkownika:</strong> <span th:text="${session.loggedInUser.getUsername()}"></span></p>
+        <p><strong>Email:</strong> <span th:text="${session.loggedInUser.getEmail()}"></span></p>
+        <p><strong>Rola:</strong> <span th:text="${session.loggedInUser.getRole()}"></span></p>
+    </div>
+</main>
+</body>
+</html>

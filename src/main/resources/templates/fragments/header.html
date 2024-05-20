@@ -23,7 +23,7 @@
             <div th:if="${session.loggedInUser != null}" class="listbox">
                 <span th:text="${session.loggedInUser.getUsername()}"></span>
                 <div class="panel">
-                    <div class="panel-item">Dane użytkownika</div>
+                    <a href= "/user-data" class="panel-item">Dane użytkownika</a>
                     <div class="panel-item">Historia Rezerwacji</div>
                     <a href = "/logout" class="logout-link">
                     <div class = "panel-item">Wyloguj</div>
