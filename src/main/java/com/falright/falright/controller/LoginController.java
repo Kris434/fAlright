@@ -40,8 +40,9 @@ public class LoginController {
             if (passwordMatches(password, hashedPassword)) {
 
                 session.setAttribute("loggedInUser", user);
+                System.out.println("Logged in user: " + session.getAttribute("loggedInUser"));
                 model.addAttribute("user", user);
-                return "home";
+                return "redirect:/";
             }
         }
 

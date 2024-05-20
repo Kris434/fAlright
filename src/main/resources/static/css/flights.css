@@ -12,7 +12,8 @@ body {
     height: 100vh;
     margin: 0;
     display: flex;
-    padding: 20px;
+
+    padding-top: 60px;
     background-image: url("https://www.shutterstock.com/image-vector/airplane-flight-pattern-white-background-600nw-1764763985.jpg");
     color: #333;
 }
@@ -50,7 +51,7 @@ a:hover {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    margin-top: 100px;
+    margin-top: 60vh;
     max-width: 1200px;
 }
 
