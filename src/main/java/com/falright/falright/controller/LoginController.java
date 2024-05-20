@@ -38,11 +38,17 @@ public class LoginController {
             String hashedPassword = user.getPassword();
 
             if (passwordMatches(password, hashedPassword)) {
-
                 session.setAttribute("loggedInUser", user);
-                System.out.println("Logged in user: " + session.getAttribute("loggedInUser"));
-                model.addAttribute("user", user);
-                return "redirect:/";
+                session.setAttribute("role", user.getRole().name());
+
+
+                if (user.getRole() == Users.Role.ADMIN) {
+                    return "redirect:/admin";
+                } else if (user.getRole() == Users.Role.EMPLOYEE) {
+                    return "redirect:/employee";
+                } else {
+                    return "redirect:/home";
+                }
             }
         }
 

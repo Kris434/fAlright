@@ -12,8 +12,4 @@ public class FAlrightApplication {
         SpringApplication.run(FAlrightApplication.class, args);
     }
 
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 }
