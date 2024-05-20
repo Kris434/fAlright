@@ -7,19 +7,7 @@
     <link rel="stylesheet"  href="/css/header.css">
 </head>
 <body>
-<header class="header">
-    <div class="header-content">
-        <a href="/" class="home-link">
-            <div class="logo-container">
-                <i class="gg-airplane"></i>
-                <p>FlightAlright</p>
-            </div>
-        </a>
-        <a href="/flights" class="flights-link">
-            <p>Spis lotów</p>
-        </a>
-    </div>
-</header>
+<header th:replace="~{fragments/header :: header}"></header>
 <main class="container">
     <div class="card">
         <h1>Profil Użytkownika</h1>

@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="/css/header.css">
     <title>Title</title>
 </head>
@@ -13,30 +14,27 @@
                 <i class="gg-airplane"></i>
                 <p>FlightAlright</p>
             </div>
-
         </a>
         <a href="/flights" class="flights-link">
             <p>Spis lotów</p>
         </a>
 
         <div class="button-container">
-            <div th:if="${session.loggedInUser != null}" class="listbox">
+            <div th:if="${session.loggedInUser != null}" class="lbx">
                 <span th:text="${session.loggedInUser.getUsername()}"></span>
                 <div class="panel">
-                    <a href= "/user-data" class="panel-item">Dane użytkownika</a>
+                    <a href="/user-data" class="panel-item">Dane użytkownika</a>
                     <div class="panel-item">Historia Rezerwacji</div>
-                    <a href = "/logout" class="logout-link">
-                    <div class = "panel-item">Wyloguj</div>
+                    <a href="/logout" class="logout-link">
+                        <div class="panel-item">Wyloguj</div>
                     </a>
                 </div>
             </div>
             <a th:if="${session.loggedInUser == null}" href="/login">
                 <button class="button button-zaloguj">Zaloguj</button>
             </a>
-
         </div>
     </div>
 </header>
 </body>
-
 </html>
