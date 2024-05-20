@@ -48,20 +48,17 @@ public class FlightController {
     }
 
 
-    @GetMapping("/add/{aircraft_id}")
-    public String addFlight(HttpSession session, Model model, @PathVariable("aircraft_id") Integer airId)
+    @PostMapping("/addFlight")
+    public String addFlight(HttpSession session, Model model, @RequestParam("aircraft") Aircrafts aircraft, @RequestParam("destination") String destination, @RequestParam("departurePoint") String departurePoint, @RequestParam("depTime") LocalDateTime depTime, @RequestParam("arrivalTime") LocalDateTime arrivalTime, @RequestParam("price") Double price)
     {
-        Optional<Aircrafts> oAircraft = aircraftRepository.findById(airId);
-        Aircrafts aircraft = new Aircrafts();
-
-        if(oAircraft.isPresent())
-        {
-            aircraft = oAircraft.get();
-        }
-
         Flights flight = new Flights();
 
         flight.setAircrafts_id(aircraft);
+        flight.setDestination(destination);
+        flight.setDeparture_point(departurePoint);
+        flight.setPrice(price);
+        flight.setArrival_time(arrivalTime);
+        flight.setDeparture_time(depTime);
 
         flightRepository.save(flight);
 
@@ -79,9 +76,7 @@ public class FlightController {
             reservationRepository.save(r);
         }
 
-        session.setAttribute("reservationList", reservationsList);
-
-        return "home";
+        return "admin";
     }
   
     @GetMapping("/search")
