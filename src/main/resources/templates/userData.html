@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Profil Użytkownika</title>
+    <link rel="stylesheet"  href="/css/userData.css">
+    <link rel="stylesheet"  href="/css/header.css">
 </head>
 <body>
 <header class="header">
@@ -18,12 +20,18 @@
         </a>
     </div>
 </header>
-<main>
-    <h1>Profil Użytkownika</h1>
-    <div>
-        <p><strong>Nazwa użytkownika:</strong> <span th:text="${session.loggedInUser.getUsername()}"></span></p>
-        <p><strong>Email:</strong> <span th:text="${session.loggedInUser.getEmail()}"></span></p>
-        <p><strong>Rola:</strong> <span th:text="${session.loggedInUser.getRole()}"></span></p>
+<main class="container">
+    <div class="card">
+        <h1>Profil Użytkownika</h1>
+        <div class="card-details">
+            <p><strong>Nazwa użytkownika:</strong> <span th:text="${session.loggedInUser.getUsername()}"></span></p>
+        </div>
+        <div class="card-details">
+            <p><strong>Email:</strong> <span th:text="${session.loggedInUser.getEmail()}"></span></p>
+        </div>
+        <div class="card-details">
+            <p><strong>Rola:</strong> <span th:text="${session.loggedInUser.getRole()}"></span></p>
+        </div>
     </div>
 </main>
 </body>
