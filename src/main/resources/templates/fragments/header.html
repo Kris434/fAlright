@@ -23,18 +23,9 @@
             <div th:if="${session.loggedInUser != null}" class="lbx">
                 <span th:text="${session.loggedInUser.getUsername()}"></span>
                 <div class="panel">
-<<<<<<< Updated upstream
-                    <a href="/user-data" class="panel-item">Dane użytkownika</a>
-                    <div class="panel-item">Historia Rezerwacji</div>
-                    <a href="/logout" class="logout-link">
-                        <div class="panel-item">Wyloguj</div>
-=======
                     <a href= "/user-data" class="panel-item">Dane użytkownika</a>
                     <a href="/your-reservations" class="panel-item">Historia Rezerwacji</a>
-                    <a href = "/logout" class="logout-link">
-                    <div class = "panel-item">Wyloguj</div>
->>>>>>> Stashed changes
-                    </a>
+                    <a href = "/logout" class="logout-link"> <div class = "panel-item">Wyloguj</div></a>
                 </div>
             </div>
             <a th:if="${session.loggedInUser == null}" href="/login">
