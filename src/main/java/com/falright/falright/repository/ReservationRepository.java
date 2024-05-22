@@ -13,9 +13,6 @@ public interface ReservationRepository extends JpaRepository<Reservations, Integ
     @Query(value = "SELECT r FROM Reservations r WHERE r.flights_id = ?1")
     List<Reservations> findByFlightId(final Flights flightId);
 
-    @Query(value = "SELECT r FROM Reservations r WHERE r.passengers_id = ?1")
-    Reservations findByPassengerId(final Passengers passengers);
-
     @Query(value = "SELECT r FROM Reservations r JOIN Passengers p ON r.passengers_id.passenger_id = p.passenger_id JOIN Users u ON p.users_id.user_id = u.user_id WHERE u.user_id = ?1")
     List<Reservations> findByLoggedUser(final Integer userId);
 

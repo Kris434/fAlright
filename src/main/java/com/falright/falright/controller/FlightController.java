@@ -76,7 +76,7 @@ public class FlightController {
             reservationRepository.save(r);
         }
 
-        return "admin";
+        return "employee";
     }
   
     @GetMapping("/search")

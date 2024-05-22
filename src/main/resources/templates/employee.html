@@ -1,10 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Panel Administracyjny</title>
+    <link rel="stylesheet"  href="/css/header.css">
 </head>
+<header th:replace="~{fragments/header :: header}"></header>
 <body>
 <h1>Panel pracownika</h1>
+<p>Aby dodać lot do bazy danych, najpierw należy dodać samolot</p>
+
+<h2>Dodaj samolot</h2>
+<form th:action="@{/employee/addAircraft}" th:method="post">
+    <label for="aircraftName">Nazwa samolotu</label>
+    <input id="aircraftName" name="aircraftName" type="text">
+
+    <label for="capacity">Ilość miejsc</label>
+    <input id="capacity" name="capacity" type="number">
+
+    <input type="submit" value="Dodaj samolot">
+</form>
+
+<h2>Dodaj lot</h2>
+<form th:action="@{/flights/addFlight}" th:method="post">
+    <label for="depTime">Czas wyylotu</label>
+    <input id="depTime" name="depTime" type="datetime-local">
+
+    <label for="departurePoint">Miejsce wylotu</label>
+    <input id="departurePoint" name="departurePoint" type="text">
+
+    <label for="arrivalTime">Czas przylotu</label>
+    <input id="arrivalTime" name="arrivalTime" type="datetime-local">
+
+    <label for="destination">Miejsce docelowe</label>
+    <input id="destination" name="destination" type="text">
+
+    <label for="price">Cena biletu</label>
+    <input id="price" name="price" type="number">
+
+    <select id="aircraft" name="aircraft">
+        <option th:each="aircraft : ${session.aircrafts}" th:value="${aircraft.getAircraft_id()}">
+            <span th:text="${aircraft.getModel()}"></span>
+            <span>, </span>
+            <span th:text="${aircraft.getCapacity()}"></span>
+        </option>
+    </select>
+
+    <input type="submit" value="Dodaj lot">
+</form>
 </body>
 </html>

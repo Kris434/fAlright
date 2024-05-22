@@ -25,19 +25,6 @@ public class AdminController {
     @GetMapping("/admin")
     public String adminAccess(Model model, HttpSession session)
     {
-        Users user = (Users) session.getAttribute("loggedInUser");
-
-        if(user != null && user.getRole() == Users.Role.ADMIN)
-        {
-            List<Aircrafts> aircraftsList = (List<Aircrafts>) aircraftRepository.findAll();
-
-            model.addAttribute("aircrafts", aircraftsList);
-
-            return "admin";
-        }
-        else
-        {
-            return "home";
-        }
+         return "admin";
     }
 }
