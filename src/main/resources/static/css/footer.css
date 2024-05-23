@@ -1,0 +1,39 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+html{
+    height: 100%;
+}
+body{
+    min-height: 100%;
+    position: relative;
+}
+
+.footer {
+    position: absolute;
+    background-color: #4395DC;
+    color: #fff;
+    height: 100px;
+    bottom: 0;
+    width: 100%;
+    margin: auto;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+}
+.logo {
+    width: 100px;
+    height: 100px;
+    justify-content: left;
+}
+.creators{
+    justify-content: right;
+    font: 16px Arial, sans-serif, bold;
+    padding-right: 15px;
+    padding-top: 20px;
+    color: white;
+    margin-left: auto;
+}
