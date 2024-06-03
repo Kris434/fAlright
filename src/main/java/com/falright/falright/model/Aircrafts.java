@@ -14,7 +14,7 @@ import lombok.Setter;
 @Table(name = "aircrafts")
 public class Aircrafts {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer aircraft_id;
     private String model;
     private Integer capacity;

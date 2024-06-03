@@ -49,4 +49,5 @@ public class UserService {
         user.setRole(Users.Role.USER);
         return saveUser(user);
     }
+
 }

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-@RequestMapping("/employee")
 public class EmployeeController {
     private final UserRepository userRepository;
     private final AircraftRepository aircraftRepository;
@@ -27,32 +26,30 @@ public class EmployeeController {
         this.aircraftRepository = aircraftRepository;
     }
 
-    @GetMapping("")
+    @PreAuthorize("hasRole('EMPLOYEE')")
+    @GetMapping("/employee")
     public String employeePage(HttpSession session, Model model)
     {
         Users user = (Users) session.getAttribute("loggedInUser");
 
-        if(user != null && user.getRole() == Users.Role.ADMIN)
-        {
+        if(user != null && user.getRole() == Users.Role.EMPLOYEE) {
             List<Aircrafts> aircraftsList = (List<Aircrafts>) aircraftRepository.findAll();
-
             session.setAttribute("aircrafts", aircraftsList);
 
             return "employee";
         }
-        else
-        {
+        else {
             return "home";
         }
     }
 
-    @PostMapping("/addAircraft")
+    @PreAuthorize("hasRole('EMPLOYEE')")
+    @PostMapping("/employee/addAircraft")
     public String addAircraft(HttpSession session, Model model, @RequestParam("aircraftName") String name, @RequestParam("capacity") Integer capacity)
     {
         Users user = (Users) session.getAttribute("loggedInUser");
 
-        if(user != null && user.getRole() == Users.Role.ADMIN)
-        {
+        if(user != null && user.getRole() == Users.Role.EMPLOYEE) {
             Aircrafts aircraft = new Aircrafts();
 
             aircraft.setModel(name);
@@ -65,10 +62,9 @@ public class EmployeeController {
 
             session.setAttribute("aircrafts", aircraftsList);
 
-            return "employee";
+            return "redirect:/employee";
         }
-        else
-        {
+        else {
             return "home";
         }
     }

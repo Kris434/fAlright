@@ -1,13 +1,25 @@
 package com.falright.falright.controller;
 
 import com.falright.falright.model.Users;
+import com.falright.falright.service.UserService;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 public class UserDataController {
+
+    private final UserService userService;
+
+    @Autowired
+    public UserDataController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/user-data")
     public String getUserProfile(Model model, HttpSession session) {
@@ -22,4 +34,5 @@ public class UserDataController {
             return "redirect:/login";
         }
     }
+
 }

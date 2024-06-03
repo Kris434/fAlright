@@ -13,10 +13,10 @@
 <h2>Dodaj samolot</h2>
 <form th:action="@{/employee/addAircraft}" th:method="post">
     <label for="aircraftName">Nazwa samolotu</label>
-    <input id="aircraftName" name="aircraftName" type="text">
+    <input id="aircraftName" name="aircraftName" type="text" required>
 
     <label for="capacity">Ilość miejsc</label>
-    <input id="capacity" name="capacity" type="number">
+    <input id="capacity" name="capacity" type="number" required>
 
     <input type="submit" value="Dodaj samolot">
 </form>
