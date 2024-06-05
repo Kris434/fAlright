@@ -1,26 +1,18 @@
-var passwordInput = document.getElementById('password-input');
-var rPasswordInput = document.getElementById('repeat-password-input');
-var togglePassword = document.getElementById('toggle-password');
-var toggleRPassword = document.getElementById('toggle-rpassword')
+var passwordFields = document.querySelectorAll('.password-field');
 
-togglePassword.addEventListener('mousedown', function () {
-    passwordInput.type = 'text';
-});
 
-togglePassword.addEventListener('mouseup', function () {
-    passwordInput.type = 'password';
-});
-togglePassword.addEventListener('mouseout', function () {
-    passwordInput.type = 'password';
-});
+passwordFields.forEach(function (passwordField) {
+    var toggleButton = passwordField.nextElementSibling;
 
-toggleRPassword.addEventListener('mousedown', function () {
-    rPasswordInput.type = 'text';
-});
+    toggleButton.addEventListener('mousedown', function () {
+        passwordField.type = 'text';
+    });
 
-toggleRPassword.addEventListener('mouseup', function () {
-    rPasswordInput.type = 'password';
-});
-toggleRPassword.addEventListener('mouseout', function () {
-    rPasswordInput.type = 'password';
+    toggleButton.addEventListener('mouseup', function () {
+        passwordField.type = 'password';
+    });
+
+    toggleButton.addEventListener('mouseout', function () {
+        passwordField.type = 'password';
+    });
 });

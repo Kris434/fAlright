@@ -21,8 +21,10 @@
             <p><strong>Rola:</strong> <span th:text="${session.loggedInUser.getRole()}"></span></p>
         </div>
         <div class="card-actions">
-            <a href="/change-password" class="btn">Zmień Hasło</a>
+            <a href="/changePassword" class="btn">Zmień Hasło</a>
         </div>
+
+        <div th:if="${message}" th:text="${message}"></div>
     </div>
 </main>
 </body>

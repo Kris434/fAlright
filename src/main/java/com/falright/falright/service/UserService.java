@@ -2,8 +2,10 @@ package com.falright.falright.service;
 
 import com.falright.falright.model.Users;
 import com.falright.falright.repository.UserRepository;
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -50,4 +52,9 @@ public class UserService {
         return saveUser(user);
     }
 
+    public void changeUserPassword(Users user, String newPassword) {
+        String encodedPassword = passwordEncoder.encode(newPassword);
+        user.setPassword(encodedPassword);
+        userRepository.save(user);
+    }
 }

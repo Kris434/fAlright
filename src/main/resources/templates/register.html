@@ -29,16 +29,16 @@
 
             <div class="card-details">
                 <i class="gg-lock"></i>
-                <input name="password" type="password" id="password-input" placeholder="Wpisz hasło" th:value="*{password}" th:errorclass="is-invalid">
+                <input name="password" type="password" class="password-field" placeholder="Wpisz hasło" th:value="*{password}" th:errorclass="is-invalid">
                 <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="invalid-feedback"></div>
-                <span id="toggle-password"><i class="gg-eye"></i></span>
+                <span class="toggle-password"><i class="gg-eye"></i></span>
             </div>
 
             <div class="card-details">
                 <i class="gg-lock"></i>
-                <input name="rpassword" type="password" id="repeat-password-input" placeholder="Powtórz hasło" th:value="*{rpassword}" th:errorclass="is-invalid">
+                <input name="rpassword" type="password" class="password-field" placeholder="Powtórz hasło" th:value="*{rpassword}" th:errorclass="is-invalid">
                 <div th:if="${#fields.hasErrors('rpassword')}" th:errors="*{rpassword}" class="invalid-feedback"></div>
-                <span id="toggle-rpassword"><i class="gg-eye"></i></span>
+                <span class="toggle-password"><i class="gg-eye"></i></span>
             </div>
 
             <input type="submit" class="sign-in" value="Załóż konto">

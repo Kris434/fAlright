@@ -1,6 +1,7 @@
 package com.falright.falright.controller;
 
 import com.falright.falright.model.Users;
+import com.falright.falright.repository.ValidationGroups;
 import com.falright.falright.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -35,7 +37,7 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public String register(@Valid @ModelAttribute("user") Users user, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+    public String register(@Validated({ValidationGroups.Register.class}) @ModelAttribute("user") Users user, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
 
         if (userService.emailExists(user.getEmail())) {
             bindingResult.addError(new FieldError("user", "email", "Podany E-mail już istnieje!"));
