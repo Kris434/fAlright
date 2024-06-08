@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -57,4 +58,15 @@ public class UserService {
         user.setPassword(encodedPassword);
         userRepository.save(user);
     }
+
+    public List<Users> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    public void assignRole(String username, Users.Role role) {
+        Users user = userRepository.findUserByUsername(username).orElseThrow(() -> new RuntimeException("User not found"));
+        user.setRole(role);
+        userRepository.save(user);
+    }
+
 }

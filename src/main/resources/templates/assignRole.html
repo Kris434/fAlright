@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Przypisz Rolę Użytkownikowi</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+
+<form action="/admin/assignRole" method="post">
+    <div class="container">
+        <div class="card">
+            <div class="top-row">
+                <h1>Przypisz Rolę Użytkownikowi</h1>
+            </div>
+
+            <div class="card-details">
+                <label for="username">Użytkownik</label>
+                <select id="username" name="username">
+                    <option th:each="user : ${users}" th:value="${user.username}">
+                        <span th:text="${user.username}"></span>
+                    </option>
+                </select>
+            </div>
+
+            <div class="card-details">
+                <label for="role">Rola</label>
+                <select id="role" name="role">
+                    <option value="USER">Użytkownik</option>
+                    <option value="EMPLOYEE">Pracownik</option>
+                    <option value="ADMIN">Administrator</option>
+                </select>
+            </div>
+
+            <input type="submit" value="Przypisz rolę">
+        </div>
+    </div>
+</form>
+
+</body>
+</html>

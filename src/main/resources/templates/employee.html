@@ -2,51 +2,81 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Administracyjny</title>
-    <link rel="stylesheet"  href="/css/header.css">
+    <link rel="stylesheet" href="/css/employee.css">
 </head>
-<header th:replace="~{fragments/header :: header}"></header>
 <body>
-<h1>Panel pracownika</h1>
-<p>Aby dodać lot do bazy danych, najpierw należy dodać samolot</p>
 
-<h2>Dodaj samolot</h2>
-<form th:action="@{/employee/addAircraft}" th:method="post">
-    <label for="aircraftName">Nazwa samolotu</label>
-    <input id="aircraftName" name="aircraftName" type="text" required>
+<div class="container">
+    <div class="card">
+        <div class="top-row">
+            <h1>Panel pracownika</h1>
+            <p>Aby dodać lot do bazy danych, najpierw należy dodać samolot</p>
+            <p class="sub-header">Dodaj samolot</p>
+        </div>
 
-    <label for="capacity">Ilość miejsc</label>
-    <input id="capacity" name="capacity" type="number" required>
+        <form th:action="@{/employee/addAircraft}" method="post">
+            <div class="card-details">
+                <label for="aircraftName">Nazwa samolotu</label>
+                <input id="aircraftName" name="aircraftName" type="text" required placeholder="Wpisz nazwę samolotu">
+            </div>
 
-    <input type="submit" value="Dodaj samolot">
-</form>
+            <div class="card-details">
+                <label for="capacity">Ilość miejsc</label>
+                <input id="capacity" name="capacity" type="number" required placeholder="Wpisz ilość miejsc">
+            </div>
 
-<h2>Dodaj lot</h2>
-<form th:action="@{/flights/addFlight}" th:method="post">
-    <label for="depTime">Czas wyylotu</label>
-    <input id="depTime" name="depTime" type="datetime-local">
+            <input type="submit" class="add-aircraft" value="Dodaj samolot">
+        </form>
+    </div>
 
-    <label for="departurePoint">Miejsce wylotu</label>
-    <input id="departurePoint" name="departurePoint" type="text">
+    <div class="card">
+        <div class="top-row">
+            <p class="sub-header">Dodaj lot</p>
+        </div>
 
-    <label for="arrivalTime">Czas przylotu</label>
-    <input id="arrivalTime" name="arrivalTime" type="datetime-local">
+        <form th:action="@{/flights/addFlight}" method="post">
+            <div class="card-details">
+                <label for="depTime">Czas wylotu</label>
+                <input id="depTime" name="depTime" type="datetime-local" placeholder="Wybierz czas wylotu">
+            </div>
 
-    <label for="destination">Miejsce docelowe</label>
-    <input id="destination" name="destination" type="text">
+            <div class="card-details">
+                <label for="departurePoint">Miejsce wylotu</label>
+                <input id="departurePoint" name="departurePoint" type="text" placeholder="Wpisz miejsce wylotu">
+            </div>
 
-    <label for="price">Cena biletu</label>
-    <input id="price" name="price" type="number">
+            <div class="card-details">
+                <label for="arrivalTime">Czas przylotu</label>
+                <input id="arrivalTime" name="arrivalTime" type="datetime-local" placeholder="Wybierz czas przylotu">
+            </div>
 
-    <select id="aircraft" name="aircraft">
-        <option th:each="aircraft : ${session.aircrafts}" th:value="${aircraft.getAircraft_id()}">
-            <span th:text="${aircraft.getModel()}"></span>
-            <span>, </span>
-            <span th:text="${aircraft.getCapacity()}"></span>
-        </option>
-    </select>
+            <div class="card-details">
+                <label for="destination">Miejsce docelowe</label>
+                <input id="destination" name="destination" type="text" placeholder="Wpisz miejsce docelowe">
+            </div>
 
-    <input type="submit" value="Dodaj lot">
-</form>
+            <div class="card-details">
+                <label for="price">Cena biletu</label>
+                <input id="price" name="price" type="number" placeholder="Wpisz cenę biletu">
+            </div>
+
+            <div class="card-details">
+                <label for="aircraft">Samolot</label>
+                <select id="aircraft" name="aircraft">
+                    <option th:each="aircraft : ${session.aircrafts}" th:value="${aircraft.getAircraft_id()}">
+                        <span th:text="${aircraft.getModel()}"></span>
+                        <span>, </span>
+                        <span th:text="${aircraft.getCapacity()}"></span>
+                    </option>
+                </select>
+            </div>
+
+            <input type="submit" class="add-flight" value="Dodaj lot">
+        </form>
+    </div>
+</div>
+
 </body>
 </html>

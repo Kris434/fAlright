@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    text-align: center;
+    padding: 20px;
+    background-image: url('https://static.vecteezy.com/system/resources/previews/002/468/358/original/flat-airplane-icon-on-blue-background-free-vector.jpg');
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+    color: #333;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.card {
+    flex: 1;
+    border-radius: 10px;
+    background-color: #68BBE3;
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.top-row {
+    color: #fff;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.top-row h1 {
+    margin-bottom: 10px;
+}
+
+.top-row .sub-header {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.card-details {
+    margin-bottom: 20px;
+}
+
+.card-details label {
+    display: block;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.card-details input, .card-details select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    background-color: #4395DC;
+    color: white;
+    outline: none;
+}
+
+.card-details input::placeholder {
+    color: #ddd;
+}
+
+.card-details select {
+    background-color: #4395DC;
+    color: white;
+}
+
+.assign-role {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: 100%;
+    font-size: 17px;
+    color: #fff;
+    border-radius: 10px;
+    background-color: #5a77e6;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.5s;
+    border: none;
+}
+
+.assign-role:hover {
+    background-color: #4395DC;
+}

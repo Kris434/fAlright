@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -66,5 +69,16 @@ public class UserController {
             return "redirect:/login";
         }
     }
+    @GetMapping("/admin/assignRole")
+    public String showAssignRoleForm(Model model) {
+        List<Users> users = userService.getAllUsers();
+        model.addAttribute("users", users);
+        return "admin";
+    }
 
+    @PostMapping("/admin/assignRole")
+    public String assignRole(@RequestParam("username") String username, @RequestParam("role") Users.Role role) {
+        userService.assignRole(username, role);
+        return "redirect:/admin";
+    }
 }
