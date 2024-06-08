@@ -15,7 +15,7 @@ import lombok.Setter;
 public class Reservations {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer reservation_id;
 
 

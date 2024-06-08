@@ -19,7 +19,7 @@ import java.util.List;
 @Table(name = "flights")
 public class Flights {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer flight_id;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")

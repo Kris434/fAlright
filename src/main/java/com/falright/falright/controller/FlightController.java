@@ -49,10 +49,16 @@ public class FlightController {
 
 
     @PostMapping("/addFlight")
-    public String addFlight(HttpSession session, Model model, @RequestParam("aircraft") Aircrafts aircraft, @RequestParam("destination") String destination, @RequestParam("departurePoint") String departurePoint, @RequestParam("depTime") LocalDateTime depTime, @RequestParam("arrivalTime") LocalDateTime arrivalTime, @RequestParam("price") Double price)
+    public String addFlight(HttpSession session, Model model,
+                            @RequestParam("aircraft") Aircrafts aircraft,
+                            @RequestParam("destination") String destination,
+                            @RequestParam("departurePoint") String departurePoint,
+                            @RequestParam("depTime") LocalDateTime depTime,
+                            @RequestParam("arrivalTime") LocalDateTime arrivalTime,
+                            @RequestParam("price") Double price)
     {
-        Flights flight = new Flights();
 
+        Flights flight = new Flights();
         flight.setAircrafts_id(aircraft);
         flight.setDestination(destination);
         flight.setDeparture_point(departurePoint);
