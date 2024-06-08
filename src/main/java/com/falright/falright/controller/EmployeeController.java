@@ -32,7 +32,9 @@ public class EmployeeController {
     {
         Users user = (Users) session.getAttribute("loggedInUser");
 
-        if(user != null && user.getRole() == Users.Role.EMPLOYEE) {
+
+        if(user != null && user.getRole() == Users.Role.EMPLOYEE || user.getRole() == Users.Role.ADMIN)
+        {
             List<Aircrafts> aircraftsList = (List<Aircrafts>) aircraftRepository.findAll();
             session.setAttribute("aircrafts", aircraftsList);
 
@@ -49,7 +51,8 @@ public class EmployeeController {
     {
         Users user = (Users) session.getAttribute("loggedInUser");
 
-        if(user != null && user.getRole() == Users.Role.EMPLOYEE) {
+        if(user != null && user.getRole() == Users.Role.EMPLOYEE  || user.getRole() == Users.Role.ADMIN)
+        {
             Aircrafts aircraft = new Aircrafts();
 
             aircraft.setModel(name);

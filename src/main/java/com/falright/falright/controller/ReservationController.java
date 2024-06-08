@@ -7,8 +7,10 @@ import com.falright.falright.model.Users;
 import com.falright.falright.repository.FlightRepository;
 import com.falright.falright.repository.PassengersRepository;
 import com.falright.falright.repository.ReservationRepository;
+import com.falright.falright.service.EmailServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import org.apache.catalina.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +24,7 @@ import java.util.stream.Collectors;
 @Controller
 public class ReservationController {
 
+    @Autowired private EmailServiceImpl emailService;
     private final FlightRepository flightsRepository;
     private final PassengersRepository passengersRepository;
     private final ReservationRepository reservationRepository;
@@ -67,7 +70,15 @@ public class ReservationController {
         passenger.setAddress(address);
         passenger.setCity(city);
         passenger.setEmail(email);
-        passenger.setPost_code(postCode);
+
+        if(postCode.length() == 6)
+        {
+            passenger.setPost_code(postCode);
+        }
+        else
+        {
+            return "reservation-form";
+        }
 
         reservation.setPassengers_id(passenger);
 
@@ -89,6 +100,14 @@ public class ReservationController {
         reservation.setStatus(true);
         reservation.setPassengers_id(passenger);
         reservationRepository.save(reservation);
+
+        String messageContent = "Twoja rezerwacja przebiegła pomyślnie! \n" +
+                "Lot: " + reservation.getFlights_id().getDeparture_point() + " -> " + reservation.getFlights_id().getDestination() + "\n" +
+                "Miejsce: " + seat + "\n" +
+                "Data: " + reservation.getFlights_id().getDeparture_time() + "\n" +
+                "Cena: " + reservation.getFlights_id().getPrice() + "zł";
+
+        emailService.sendEmail(passenger.getEmail(), "Rezerwacja przebiegła pomyślnie!", messageContent);
 
         return "reservation-success";
     }

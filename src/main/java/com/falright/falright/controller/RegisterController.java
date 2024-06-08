@@ -2,6 +2,7 @@ package com.falright.falright.controller;
 
 import com.falright.falright.model.Users;
 import com.falright.falright.repository.ValidationGroups;
+import com.falright.falright.service.EmailServiceImpl;
 import com.falright.falright.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class RegisterController {
+    @Autowired private EmailServiceImpl emailService;
     private final UserService userService;
 
     @InitBinder
@@ -59,6 +61,8 @@ public class RegisterController {
 
         redirectAttributes.addFlashAttribute("message", "Rejestracja przebiegła pomyślnie!");
         userService.registerUser(user);
+
+        emailService.sendEmail(user.getEmail(), "Rejestracja", "Witaj " + user.getUsername() + "! Twoje konto zostało utworzone pomyślnie!");
 
         model.addAttribute("user", user);
         return "redirect:/login";

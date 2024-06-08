@@ -37,5 +37,19 @@
     </div>
 </div>
 
+<!--<h2>Wybierz użytkownika, któremu chcesz nadać uprawnienia</h2>
+<form th:action="@{/updateRole}" th:method="post">
+    <select id="user" name="user">
+        <option th:each="user : ${users}" th:value="${user.getUser_id()}">
+            <span th:text="${user.getUsername()}"></span>
+        </option>
+    </select>
+    <select id="role" name="role">
+        <option th:each="role : ${roles}" th:value="${role}">
+            <span th:text="${role}"></span>
+        </option>
+    </select>
+    <input type="submit" value="Nadaj uprawnienia">
+</form>-->
 </body>
 </html>
