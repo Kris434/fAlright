@@ -5,9 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Administracyjny</title>
     <link rel="stylesheet" href="/css/employee.css">
+    <link rel="stylesheet"  href="/css/header.css">
+    <link rel="stylesheet"  href="/css/footer.css">
 </head>
-<body>
+<header th:replace="~{fragments/header :: header}"></header>
 
+<body>
 <div class="container">
     <div class="card">
         <div class="top-row">
@@ -78,5 +81,6 @@
     </div>
 </div>
 
+<footer th:replace="~{fragments/footer.html :: footer}"></footer>
 </body>
 </html>

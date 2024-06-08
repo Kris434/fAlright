@@ -3,6 +3,7 @@ package com.falright.falright.controller;
 import com.falright.falright.model.Users;
 import com.falright.falright.repository.UserRepository;
 import com.falright.falright.repository.ValidationGroups;
+import com.falright.falright.service.EmailServiceImpl;
 import com.falright.falright.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class UserController {
 
     private final UserService userService;
     private final BCryptPasswordEncoder passwordEncoder;
-
+    @Autowired private EmailServiceImpl emailService;
 
     @Autowired
     public UserController(UserService userService, BCryptPasswordEncoder passwordEncoder) {
@@ -57,9 +58,12 @@ public class UserController {
             }
 
             if (passwordEncoder.matches(user.getPassword(), loggedInUser.getPassword())) {
+
                 loggedInUser.setPassword(passwordEncoder.encode(user.getNewPassword()));
                 userService.saveUser(loggedInUser);
+                emailService.sendEmail(loggedInUser.getEmail(), "Zmiana hasła", "Twoje hasło zostało zmienione pomyślnie!");
                 redirectAttributes.addFlashAttribute("message", "Hasło zostało zmienione!");
+
                 return "redirect:/user-data";
             } else {
                 model.addAttribute("error", "Stare hasło jest nieprawidłowe");
