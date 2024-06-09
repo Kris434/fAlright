@@ -39,7 +39,9 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public String register(@Validated({ValidationGroups.Register.class}) @ModelAttribute("user") Users user, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+    public String register(@Validated({ValidationGroups.Register.class}) @ModelAttribute("user") Users user,
+                           BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes)
+    {
 
         if (userService.emailExists(user.getEmail())) {
             bindingResult.addError(new FieldError("user", "email", "Podany E-mail już istnieje!"));

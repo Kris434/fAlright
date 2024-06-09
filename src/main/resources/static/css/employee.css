@@ -103,3 +103,17 @@ body {
 .add-aircraft:hover, .add-flight:hover {
     background-color: #4395DC;
 }
+
+.invalid-feedback {
+    color: red;
+    font-size: 14px;
+    text-align: left;
+    margin-top: 5px;
+    display: block;
+    clear: both;
+}
+
+.message, .success {
+    color: white;
+    text-align: center;
+}

@@ -2,6 +2,10 @@ package com.falright.falright.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,13 +26,20 @@ public class Flights {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer flight_id;
 
+
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime departure_time;
 
+
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime arrival_time;
+
+
     private String destination;
+
+
     private String departure_point;
+
 
     private Double price;
 

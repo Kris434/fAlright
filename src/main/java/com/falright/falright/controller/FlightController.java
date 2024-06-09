@@ -47,43 +47,6 @@ public class FlightController {
         return "flights";
     }
 
-
-    @PostMapping("/addFlight")
-    public String addFlight(HttpSession session, Model model,
-                            @RequestParam("aircraft") Aircrafts aircraft,
-                            @RequestParam("destination") String destination,
-                            @RequestParam("departurePoint") String departurePoint,
-                            @RequestParam("depTime") LocalDateTime depTime,
-                            @RequestParam("arrivalTime") LocalDateTime arrivalTime,
-                            @RequestParam("price") Double price)
-    {
-
-        Flights flight = new Flights();
-        flight.setAircrafts_id(aircraft);
-        flight.setDestination(destination);
-        flight.setDeparture_point(departurePoint);
-        flight.setPrice(price);
-        flight.setArrival_time(arrivalTime);
-        flight.setDeparture_time(depTime);
-
-        flightRepository.save(flight);
-
-        List<Reservations> reservationsList = new ArrayList<>();
-
-        for(int i = 0; i < aircraft.getCapacity(); i++)
-        {
-            Reservations r = new Reservations();
-
-            r.setSeat_number(i + 1);
-            r.setFlights_id(flight);
-            r.setStatus(false);
-
-            reservationsList.add(r);
-            reservationRepository.save(r);
-        }
-
-        return "employee";
-    }
   
     @GetMapping("/search")
     public String searchFlights(@RequestParam("departure") String departure,
