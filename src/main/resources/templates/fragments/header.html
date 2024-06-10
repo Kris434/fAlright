@@ -18,9 +18,11 @@
         <a href="/flights" class="flights-link">
             <p>Spis lotów</p>
         </a>
-        <a th:if="${'ADMIN'}" href="/admin" class="admin-link">
-            <p>Panel Administracyjny</p>
-        </a>
+        <div th:if="${session.loggedInUser != null}">
+            <a th:if="${session.loggedInUser.getRole().toString() == 'ADMIN'}" href="/admin" class="admin-link">
+                <p>Panel Administracyjny</p>
+            </a>
+        </div>
         <div class="button-container">
             <div th:if="${session.loggedInUser != null}" class="lbx">
                 <span th:text="${session.loggedInUser.getUsername()}"></span>
