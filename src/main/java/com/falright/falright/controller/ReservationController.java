@@ -40,10 +40,12 @@ public class ReservationController {
         if (session.getAttribute("loggedInUser") != null) {
             Reservations reservations = new Reservations();
             Optional<Flights> optionalFlights = flightsRepository.findById(flightId);
+            Flights flights = optionalFlights.get();
 
-            optionalFlights.ifPresent(reservations::setFlights_id);
+            reservations.setFlights_id(flights);
 
             session.setAttribute("reservation", reservations);
+            session.setAttribute("flightPrice", flights.getPrice());
 
             return "reservation-form";
         }
@@ -57,6 +59,7 @@ public class ReservationController {
     public String getPersonalInfoReservation(Model model, HttpSession session, @RequestParam("firstName") String name, @RequestParam("lastName") String lastName, @RequestParam("phoneNumber") String phoneNumber, @RequestParam("email") String email, @RequestParam("city") String city, @RequestParam("postCode") String postCode, @RequestParam("address") String address, @RequestParam("baggage") String baggage)
     {
         Reservations reservation = (Reservations) session.getAttribute("reservation");
+        Double flightPrice = (Double) session.getAttribute("flightPrice");
         Passengers passenger = new Passengers();
         Users user = (Users) session.getAttribute("loggedInUser");
 
@@ -80,6 +83,19 @@ public class ReservationController {
             return "reservation-form";
         }
 
+        switch (baggage)
+        {
+            case "PODRECZNY":
+                session.setAttribute("totalPrice", flightPrice + 40.0);
+                break;
+            case "ZWYKLY":
+                session.setAttribute("totalPrice", flightPrice + 80.0);
+                break;
+            default:
+                session.setAttribute("totalPrice", flightPrice);
+                break;
+        }
+
         reservation.setPassengers_id(passenger);
         reservation.setBaggage(Reservations.Baggage.valueOf(baggage));
 
@@ -101,13 +117,14 @@ public class ReservationController {
         reservation.setStatus(true);
         reservation.setPassengers_id(passenger);
         reservation.setBaggage(reservationSession.getBaggage());
+        reservation.setTotalPrice((Double) session.getAttribute("totalPrice"));
         reservationRepository.save(reservation);
 
         String messageContent = "Twoja rezerwacja przebiegła pomyślnie! \n" +
                 "Lot: " + reservation.getFlights_id().getDeparture_point() + " -> " + reservation.getFlights_id().getDestination() + "\n" +
                 "Miejsce: " + seat + "\n" +
                 "Data: " + reservation.getFlights_id().getDeparture_time() + "\n" +
-                "Cena: " + reservation.getFlights_id().getPrice() + "zł" + "\n" +
+                "Cena: " + reservation.getTotalPrice() + "zł" + "\n" +
                 "Bagaż: " + reservation.getBaggage() + "\n";
 
         emailService.sendEmail(passenger.getEmail(), "Rezerwacja przebiegła pomyślnie!", messageContent);

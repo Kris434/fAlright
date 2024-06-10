@@ -33,5 +33,7 @@ public class Reservations {
     @Enumerated(EnumType.STRING)
     private Baggage baggage;
 
+    private Double totalPrice;
+
     public enum Baggage { BRAK, PODRECZNY, ZWYKLY }
 }

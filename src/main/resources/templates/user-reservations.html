@@ -16,6 +16,7 @@
     <div class="flights" th:each="reservation : ${userReservations}">
         <div  class="flight-info">
             <div class="info">
+                <h5>Dane lotu</h5>
                 <strong>
                     <span th:text="${#temporals.format(reservation.getFlights_id().getDeparture_time(), 'yyyy-MM-dd HH:mm')}"></span>
                 </strong>
@@ -25,6 +26,7 @@
                     <span th:text="${#temporals.format(reservation.getFlights_id().getArrival_time(), 'yyyy-MM-dd HH:mm')}"></span>
                 </strong>
                 <span th:text="${reservation.getFlights_id().getDestination()}"></span>
+                <p th:text="${'Cena biletu: ' + reservation.getTotalPrice()}"></p>
                 <h5>Dane użytkownika</h5>
                 <span th:text="${reservation.getPassengers_id().getName()} + ' ' + ${reservation.getPassengers_id().getSurname()}"></span>
                 <p th:text="'Email: ' + ${reservation.getPassengers_id().getEmail()}"></p>
