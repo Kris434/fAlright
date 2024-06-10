@@ -38,12 +38,6 @@ html {
     font-size: 24px;
 }
 
-.home-link p,
-.admin-link p {
-    margin: 0;
-    font-size: 24px;
-}
-
 .button-container {
     margin-left: auto;
 }
@@ -57,23 +51,8 @@ html {
     padding: 10px 20px;
 }
 
-.home-link,
-.admin-link {
-    text-decoration: none;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-}
-
 .home-link:hover,
 .flights-link:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 5px;
-}
-
-.home-link:hover,
-.admin-link:hover {
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 5px;
 }

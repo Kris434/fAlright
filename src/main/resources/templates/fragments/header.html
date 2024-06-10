@@ -19,9 +19,15 @@
             <p>Spis lotów</p>
         </a>
         <div th:if="${session.loggedInUser != null}">
-            <a th:if="${session.loggedInUser.getRole().toString() == 'ADMIN'}" href="/admin" class="admin-link">
+            <a th:if="${session.loggedInUser.getRole().toString() == 'ADMIN'}" href="/admin" class="flights-link">
                 <p>Panel Administracyjny</p>
             </a>
+        </div>
+        <div th:if="${session.loggedInUser != null}">
+            <a th:if="${session.loggedInUser.getRole().toString() == 'EMPLOYEE'}" href="/employee" class="flights-link">
+                <p>Panel Pracowniczy</p>
+            </a>
+
         </div>
         <div class="button-container">
             <div th:if="${session.loggedInUser != null}" class="lbx">
