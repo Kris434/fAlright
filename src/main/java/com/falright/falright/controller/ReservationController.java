@@ -54,7 +54,7 @@ public class ReservationController {
     }
 
     @PostMapping("/personal-info")
-    public String getPersonalInfoReservation(Model model, HttpSession session, @RequestParam("firstName") String name, @RequestParam("lastName") String lastName, @RequestParam("phoneNumber") String phoneNumber, @RequestParam("email") String email, @RequestParam("city") String city, @RequestParam("postCode") String postCode, @RequestParam("address") String address)
+    public String getPersonalInfoReservation(Model model, HttpSession session, @RequestParam("firstName") String name, @RequestParam("lastName") String lastName, @RequestParam("phoneNumber") String phoneNumber, @RequestParam("email") String email, @RequestParam("city") String city, @RequestParam("postCode") String postCode, @RequestParam("address") String address, @RequestParam("baggage") String baggage)
     {
         Reservations reservation = (Reservations) session.getAttribute("reservation");
         Passengers passenger = new Passengers();
@@ -81,6 +81,7 @@ public class ReservationController {
         }
 
         reservation.setPassengers_id(passenger);
+        reservation.setBaggage(Reservations.Baggage.valueOf(baggage));
 
         passengersRepository.save(passenger);
 
@@ -99,13 +100,15 @@ public class ReservationController {
 
         reservation.setStatus(true);
         reservation.setPassengers_id(passenger);
+        reservation.setBaggage(reservationSession.getBaggage());
         reservationRepository.save(reservation);
 
         String messageContent = "Twoja rezerwacja przebiegła pomyślnie! \n" +
                 "Lot: " + reservation.getFlights_id().getDeparture_point() + " -> " + reservation.getFlights_id().getDestination() + "\n" +
                 "Miejsce: " + seat + "\n" +
                 "Data: " + reservation.getFlights_id().getDeparture_time() + "\n" +
-                "Cena: " + reservation.getFlights_id().getPrice() + "zł";
+                "Cena: " + reservation.getFlights_id().getPrice() + "zł" + "\n" +
+                "Bagaż: " + reservation.getBaggage() + "\n";
 
         emailService.sendEmail(passenger.getEmail(), "Rezerwacja przebiegła pomyślnie!", messageContent);
 
