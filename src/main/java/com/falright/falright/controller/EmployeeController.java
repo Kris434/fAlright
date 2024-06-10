@@ -57,6 +57,14 @@ public class EmployeeController {
     }
 
     @PreAuthorize("hasRole('EMPLOYEE')")
+    @GetMapping("/employee/addAircraft")
+    public String showAddAircraftForm(Model model)
+    {
+        model.addAttribute("aircraft", new Aircrafts());
+        return "addAircraft";
+    }
+
+    @PreAuthorize("hasRole('EMPLOYEE')")
     @PostMapping("/employee/addAircraft")
     public String addAircraft(@Valid @ModelAttribute("aircraft") Aircrafts aircraft, BindingResult bindingResult,
                               RedirectAttributes redirectAttributes, HttpSession session, Model model)
@@ -67,7 +75,7 @@ public class EmployeeController {
         {
             if (bindingResult.hasErrors()) {
                 model.addAttribute("aircraft", aircraft);
-                return "employee";
+                return "addAircraft";
             }
 
 
@@ -76,7 +84,7 @@ public class EmployeeController {
 
             List<Aircrafts> aircraftsList = (List<Aircrafts>) aircraftRepository.findAll();
             session.setAttribute("aircrafts", aircraftsList);
-
+            redirectAttributes.addFlashAttribute("message", "Samolot został dodany pomyślnie!");
             return "redirect:/employee";
         }
         else {
@@ -84,44 +92,51 @@ public class EmployeeController {
         }
     }
 
+    @PreAuthorize("hasRole('EMPLOYEE')")
+    @GetMapping("/employee/addFlight")
+    public String showAddFlightForm(Model model, HttpSession session)
+    {
+        List<Aircrafts> aircraftsList = (List<Aircrafts>) aircraftRepository.findAll();
+        session.setAttribute("aircrafts", aircraftsList);
+        model.addAttribute("aircraft", new Aircrafts());
+        model.addAttribute("flight", new Flights());
+        return "addFlight";
+    }
+
     @PostMapping("/employee/addFlight")
-    public String addFlight(@ModelAttribute("flight") Flights flight,
-                             HttpSession session, Model model,
-                            @RequestParam("aircraft") Aircrafts aircraft,
-                            @RequestParam("destination") String destination,
-                            @RequestParam("departurePoint") String departurePoint,
-                            @RequestParam("depTime") LocalDateTime depTime,
-                            @RequestParam("arrivalTime") LocalDateTime arrivalTime,
-                            @RequestParam("price") Double price)
+    public String addFlight(@Valid @ModelAttribute("flight") Flights flight, BindingResult bindingResult,
+                            RedirectAttributes redirectAttributes,
+                            HttpSession session, Model model,
+                            @RequestParam("aircraftId") Aircrafts aircraft)
     {
         Users user = (Users) session.getAttribute("loggedInUser");
 
         if(user != null && user.getRole() == Users.Role.EMPLOYEE) {
 
+            if (bindingResult.hasErrors()) {
+                model.addAttribute("flight", flight);
+                return "addFlight";
+            }
 
             flight.setAircrafts_id(aircraft);
-            flight.setDestination(destination);
-            flight.setDeparture_time(depTime);
-            flight.setArrival_time(arrivalTime);
-            flight.setPrice(price);
-            flight.setDeparture_point(departurePoint);
+
             flightRepository.save(flight);
 
-            List<Reservations> reservationsList = new ArrayList<>();
+            List<Reservations> reservationList = new ArrayList<>();
 
-            for(int i = 0; i < aircraft.getCapacity(); i++)
-            {
+            for(int i = 0; i < aircraft.getCapacity(); i++) {
                 Reservations r = new Reservations();
 
                 r.setSeat_number(i + 1);
                 r.setFlights_id(flight);
                 r.setStatus(false);
 
-                reservationsList.add(r);
+                reservationList.add(r);
                 reservationRepository.save(r);
             }
 
             model.addAttribute("aircraft", aircraft);
+            redirectAttributes.addFlashAttribute("message", "Lot został dodany pomyślnie!");
             return "redirect:/employee";
         }
         else {
