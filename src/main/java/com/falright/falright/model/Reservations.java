@@ -30,4 +30,8 @@ public class Reservations {
     @JoinColumn(name = "passenger_id")
     private Passengers passengers_id;
 
+    @Enumerated(EnumType.STRING)
+    private Baggage baggage;
+
+    public enum Baggage { BRAK, PODRECZNY, ZWYKLY }
 }
