@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administracyjny</title>
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet"  href="/css/header.css">
+    <link rel="stylesheet"  href="/css/footer.css">
+</head>
+<header th:replace="~{fragments/header :: header}"></header>
+<body>
+
+<div class="container">
+    <div class="card">
+        <div class="top-row">
+            <h1>Nadawanie uprawnień użytkownikom</h1>
+        </div>
+
+        <form th:action="@{/admin/assignRole}" method="post">
+            <div class="card-details">
+                <label for="username">Wybierz użytkownika</label>
+                <select id="username" name="username">
+                    <option th:each="user : ${users}" th:value="${user.username}" th:text="${user.username}"></option>
+                </select>
+            </div>
+
+            <div class="card-details">
+                <label for="role">Rola</label>
+                <select id="role" name="role">
+                    <option value="USER">USER</option>
+                    <option value="EMPLOYEE">EMPLOYEE</option>
+                    <option value="ADMIN">ADMIN</option>
+                </select>
+            </div>
+
+            <input type="submit" class="assign-role" value="Nadaj rolę">
+        </form>
+    </div>
+</div>
+
+<footer th:replace="~{fragments/footer.html :: footer}"></footer>
+</body>
+</html>

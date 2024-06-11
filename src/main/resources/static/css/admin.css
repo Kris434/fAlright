@@ -103,3 +103,8 @@ body {
 .assign-role:hover {
     background-color: #4395DC;
 }
+
+.message{
+    color: white;
+    text-align: center;
+}

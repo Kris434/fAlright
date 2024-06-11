@@ -145,7 +145,7 @@ body {
     clear: both;
 }
 
-.message, .success {
+.message{
     color: white;
     text-align: center;
 }

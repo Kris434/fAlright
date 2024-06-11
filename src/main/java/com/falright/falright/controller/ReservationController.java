@@ -129,7 +129,7 @@ public class ReservationController {
 
         emailService.sendEmail(passenger.getEmail(), "Rezerwacja przebiegła pomyślnie!", messageContent);
 
-        return "reservation-success";
+        return "home";
     }
 
     @GetMapping("/your-reservations")

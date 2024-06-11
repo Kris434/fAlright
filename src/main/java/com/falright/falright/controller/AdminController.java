@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,7 +54,9 @@ public class AdminController {
     }
 
     @PostMapping("/updateRole")
-    public String updateRole(HttpSession session, Model model, @RequestParam("user") Integer userId, @RequestParam("role") String role) {
+    public String updateRole(HttpSession session, Model model,
+                             @RequestParam("user") Integer userId,
+                             @RequestParam("role") String role) {
         Users user = (Users) session.getAttribute("loggedInUser");
 
         if(user != null && user.getRole() == Users.Role.ADMIN) {
@@ -69,4 +72,24 @@ public class AdminController {
             return "home";
         }
     }
+
+    @GetMapping("/admin/assignRole")
+    public String showAssignRoleForm(Model model)
+    {
+        List<Users> users = userService.getAllUsers();
+        model.addAttribute("users", users);
+        return "assignRole";
+    }
+
+    @PostMapping("/admin/assignRole")
+    public String assignRole(RedirectAttributes redirectAttributes,
+                             @RequestParam("username") String username,
+                             @RequestParam("role") Users.Role role)
+    {
+        userService.assignRole(username, role);
+
+        redirectAttributes.addFlashAttribute("message", "Uprawnienie zostało zmienione!");
+        return "redirect:/admin";
+    }
+
 }
