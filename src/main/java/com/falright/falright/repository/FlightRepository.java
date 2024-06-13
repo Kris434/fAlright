@@ -11,7 +11,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
-public interface FlightRepository extends JpaRepository<Flights, Integer> {
+public interface FlightRepository extends JpaRepository<Flights, Integer>
+{
     @Query("SELECT f FROM Flights f WHERE f.departure_point = :departure AND f.destination = :destination " +
             "AND (:departureDateStart IS NULL OR f.departure_time BETWEEN :departureDateStart AND :departureDateEnd) " +
             "AND (:arrivalDateStart IS NULL OR f.arrival_time BETWEEN :arrivalDateStart AND :arrivalDateEnd)")
@@ -22,9 +23,34 @@ public interface FlightRepository extends JpaRepository<Flights, Integer> {
                                         @Param("arrivalDateStart") LocalDateTime arrivalDateStart,
                                         @Param("arrivalDateEnd") LocalDateTime arrivalDateEnd);
 
-    // Query to get flights by departure and destination if dates are not provided
+
     @Query("SELECT f FROM Flights f WHERE f.departure_point = :departure AND f.destination = :destination")
     List<Flights> findFlightsByDepartureAndDestination(@Param("departure") String departure,
                                                        @Param("destination") String destination);
+
+
+    @Query("SELECT a.model, COUNT(f) AS num_flights " +
+            "FROM Flights f JOIN f.aircrafts_id a " +
+            "GROUP BY a.model ORDER BY num_flights DESC")
+    List<Object[]> findAircraftWithMostFlights();
+
+    @Query("SELECT f.departure_point, f.destination, COUNT(r) AS num_reservations " +
+            "FROM Flights f JOIN Reservations r ON f.flight_id = r.flights_id.flight_id " +
+            "WHERE r.status = true " +
+            "GROUP BY f.departure_point, f.destination ORDER BY num_reservations DESC")
+    List<Object[]> findFlightWithMostReservations();
+
+    @Query(value = "SELECT f.departure_point, f.destination, TIMESTAMPDIFF(HOUR, f.departure_time, f.arrival_time) AS duration_hours " +
+            "FROM flights f ORDER BY duration_hours DESC", nativeQuery = true)
+    List<Object[]> findLongestFlight();
+
+    @Query("SELECT f.departure_point, f.destination, f.price " +
+            "FROM Flights f ORDER BY f.price DESC")
+    List<Object[]> findMostExpensiveFlight();
+
+    @Query("SELECT f.departure_point, f.destination, COUNT(r) AS num_passengers " +
+            "FROM Flights f JOIN Reservations r ON f.flight_id = r.flights_id.flight_id " +
+            "GROUP BY f.departure_point, f.destination ORDER BY num_passengers DESC")
+    List<Object[]> findFlightWithMostPassengers();
 }
 

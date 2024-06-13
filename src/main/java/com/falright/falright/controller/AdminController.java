@@ -2,6 +2,8 @@ package com.falright.falright.controller;
 
 import com.falright.falright.model.Users;
 import com.falright.falright.repository.AircraftRepository;
+import com.falright.falright.repository.FlightRepository;
+import com.falright.falright.service.ReportService;
 import com.falright.falright.service.UserService;
 import com.falright.falright.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
@@ -20,15 +22,16 @@ import java.util.List;
 
 @Controller
 public class AdminController {
-    private final AircraftRepository aircraftRepository;
+
     private final UserRepository userRepository;
     private final UserService userService;
+    private final ReportService reportService;
 
-    public AdminController(AircraftRepository aircraftRepository, UserService userService, UserRepository userRepository)
+    public AdminController(UserService userService, UserRepository userRepository, ReportService reportService)
     {
-        this.aircraftRepository = aircraftRepository;
         this.userService = userService;
         this.userRepository = userRepository;
+        this.reportService = reportService;
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -90,6 +93,18 @@ public class AdminController {
 
         redirectAttributes.addFlashAttribute("message", "Uprawnienie zostało zmienione!");
         return "redirect:/admin";
+    }
+
+    @GetMapping("/admin/report")
+    public String generateReport(Model model)
+    {
+        model.addAttribute("aircraftWithMostFlights", reportService.getAircraftWithMostFlights());
+        model.addAttribute("flightWithMostReservations", reportService.getFlightWithMostReservations());
+        model.addAttribute("longestFlight", reportService.getLongestFlight());
+        model.addAttribute("mostExpensiveFlight", reportService.getMostExpensiveFlight());
+        model.addAttribute("flightWithMostPassengers", reportService.getFlightWithMostPassengers());
+
+        return "report";
     }
 
 }
