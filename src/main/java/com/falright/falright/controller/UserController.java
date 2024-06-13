@@ -42,14 +42,22 @@ public class UserController {
     }
 
     @PostMapping("/changePassword")
-    public String changePassword(HttpSession session, Model model, @Validated({ValidationGroups.ChangePassword.class}) @ModelAttribute("user") Users user, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String changePassword(HttpSession session, Model model,
+                                 @Validated({ValidationGroups.ChangePassword.class})
+                                 @ModelAttribute("user") Users user, BindingResult bindingResult,
+                                 RedirectAttributes redirectAttributes) {
+
         Users loggedInUser = (Users) session.getAttribute("loggedInUser");
 
         if (loggedInUser != null) {
-            // Dodanie walidacji haseł
-            if (user.getNewPassword() != null && user.getRpassword() != null) {
+
+
+            if (user.getNewPassword() != null && !user.getNewPassword().isEmpty()) {
+                if (user.getNewPassword().equals(user.getPassword())) {
+                    bindingResult.addError(new FieldError("user", "newPassword", "Nowe hasło nie może być takie same jak wcześniej!"));
+                }
                 if (!user.getNewPassword().equals(user.getRpassword())) {
-                    bindingResult.addError(new FieldError("user", "rpassword", "Hasła muszą być takie same!"));
+                    bindingResult.addError(new FieldError("user", "rpassword", "Nowe hasło nie zgadza się z powtórzeniem!"));
                 }
             }
 

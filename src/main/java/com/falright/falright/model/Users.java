@@ -48,4 +48,8 @@ public class Users {
 
     public enum Role { USER, EMPLOYEE, ADMIN }
 
+    public boolean isNewPasswordDifferent() {
+        return newPassword != null && !newPassword.equals(password);
+    }
+
 }
