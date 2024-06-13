@@ -1,17 +1,12 @@
 package com.falright.falright.model;
 
-import com.falright.falright.controller.RegisterController;
 import com.falright.falright.repository.ValidationGroups;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.groups.Default;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 
-import java.util.Collection;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -47,9 +42,5 @@ public class Users {
     private Role role;
 
     public enum Role { USER, EMPLOYEE, ADMIN }
-
-    public boolean isNewPasswordDifferent() {
-        return newPassword != null && !newPassword.equals(password);
-    }
 
 }

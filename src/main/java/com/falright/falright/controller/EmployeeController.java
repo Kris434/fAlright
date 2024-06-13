@@ -7,17 +7,15 @@ import com.falright.falright.model.Users;
 import com.falright.falright.repository.AircraftRepository;
 import com.falright.falright.repository.FlightRepository;
 import com.falright.falright.repository.ReservationRepository;
-import com.falright.falright.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +26,8 @@ public class EmployeeController {
     private final ReservationRepository reservationRepository;
 
     public EmployeeController(AircraftRepository aircraftRepository, FlightRepository flightRepository,
-                              ReservationRepository reservationRepository)
-    {
+                              ReservationRepository reservationRepository) {
+
         this.aircraftRepository = aircraftRepository;
         this.flightRepository = flightRepository;
         this.reservationRepository = reservationRepository;
@@ -37,13 +35,12 @@ public class EmployeeController {
 
     @PreAuthorize("hasRole('EMPLOYEE')")
     @GetMapping("/employee")
-    public String employeePage(HttpSession session, Model model)
-    {
+    public String employeePage(HttpSession session, Model model) {
+
         Users user = (Users) session.getAttribute("loggedInUser");
 
 
-        if(user != null && user.getRole() == Users.Role.EMPLOYEE)
-        {
+        if(user != null && user.getRole() == Users.Role.EMPLOYEE) {
             List<Aircrafts> aircraftsList = (List<Aircrafts>) aircraftRepository.findAll();
             session.setAttribute("aircrafts", aircraftsList);
             model.addAttribute("aircraft", new Aircrafts());
@@ -58,17 +55,18 @@ public class EmployeeController {
 
     @PreAuthorize("hasRole('EMPLOYEE')")
     @GetMapping("/employee/addAircraft")
-    public String showAddAircraftForm(Model model)
-    {
+    public String showAddAircraftForm(Model model) {
+
         model.addAttribute("aircraft", new Aircrafts());
         return "addAircraft";
     }
 
     @PreAuthorize("hasRole('EMPLOYEE')")
     @PostMapping("/employee/addAircraft")
-    public String addAircraft(@Valid @ModelAttribute("aircraft") Aircrafts aircraft, BindingResult bindingResult,
-                              RedirectAttributes redirectAttributes, HttpSession session, Model model)
-    {
+    public String addAircraft(@Valid @ModelAttribute("aircraft") Aircrafts aircraft,
+                              BindingResult bindingResult, RedirectAttributes redirectAttributes,
+                              HttpSession session, Model model) {
+
         Users user = (Users) session.getAttribute("loggedInUser");
 
         if(user != null && user.getRole() == Users.Role.EMPLOYEE)
@@ -94,8 +92,8 @@ public class EmployeeController {
 
     @PreAuthorize("hasRole('EMPLOYEE')")
     @GetMapping("/employee/addFlight")
-    public String showAddFlightForm(Model model, HttpSession session)
-    {
+    public String showAddFlightForm(Model model, HttpSession session) {
+
         List<Aircrafts> aircraftsList = (List<Aircrafts>) aircraftRepository.findAll();
         session.setAttribute("aircrafts", aircraftsList);
         model.addAttribute("aircraft", new Aircrafts());
@@ -103,23 +101,36 @@ public class EmployeeController {
         return "addFlight";
     }
 
+    @PreAuthorize("hasRole('EMPLOYEE')")
     @PostMapping("/employee/addFlight")
     public String addFlight(@Valid @ModelAttribute("flight") Flights flight, BindingResult bindingResult,
                             RedirectAttributes redirectAttributes,
                             HttpSession session, Model model,
-                            @RequestParam("aircraftId") Aircrafts aircraft)
-    {
+                            @RequestParam("aircraftId") Aircrafts aircraft) {
+
         Users user = (Users) session.getAttribute("loggedInUser");
 
         if(user != null && user.getRole() == Users.Role.EMPLOYEE) {
 
+            if(flight.getDeparture_time() != null && flight.getArrival_time() != null) {
+                if(flight.getDeparture_time().isAfter(flight.getArrival_time())) {
+                    bindingResult.addError(new FieldError("flight", "departure_time", "Data wylotu musi być przed datą przylotu!"));
+                }
+            }
+
+            if (!flight.getDeparture_point().isEmpty() && !flight.getDestination().isEmpty()) {
+                if (flight.getDeparture_point().equals(flight.getDestination())) {
+                    bindingResult.addError(new FieldError("flight", "destination", "Miejsce wylotu nie może być takie samo jak miejsce docelowe!"));
+                }
+            }
+
             if (bindingResult.hasErrors()) {
                 model.addAttribute("flight", flight);
+                model.addAttribute("aircraft", aircraft.getAircraft_id());
                 return "addFlight";
             }
 
             flight.setAircrafts_id(aircraft);
-
             flightRepository.save(flight);
 
             List<Reservations> reservationList = new ArrayList<>();

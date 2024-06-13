@@ -27,7 +27,7 @@
 
             <div class="card-details">
                 <label for="departurePoint">Miejsce wylotu</label>
-                <input id="departurePoint" th:field="*{departure_point}" name="departurePoint" type="text" placeholder="Wpisz miejsce wylotu">
+                <input id="departurePoint" th:field="*{departure_point}" name="departurePoint" type="text" placeholder="Wybierz miejsce wylotu">
                 <div th:if="${#fields.hasErrors('departure_point')}" th:errors="*{departure_point}" class="invalid-feedback"></div>
             </div>
 
@@ -39,7 +39,7 @@
 
             <div class="card-details">
                 <label for="destination">Miejsce docelowe</label>
-                <input id="destination" th:field="*{destination}" name="destination" type="text" placeholder="Wpisz miejsce docelowe">
+                <input id="destination" th:field="*{destination}" name="destination" type="text" placeholder="Wybierz miejsce docelowe">
                 <div th:if="${#fields.hasErrors('destination')}" th:errors="*{destination}" class="invalid-feedback"></div>
             </div>
 

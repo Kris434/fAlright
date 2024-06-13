@@ -1,7 +1,6 @@
 package com.falright.falright.controller;
 
 import com.falright.falright.model.Users;
-import com.falright.falright.repository.UserRepository;
 import com.falright.falright.repository.ValidationGroups;
 import com.falright.falright.service.EmailServiceImpl;
 import com.falright.falright.service.UserService;
@@ -16,10 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
 
 @Controller
 public class UserController {
@@ -33,7 +30,6 @@ public class UserController {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
     }
-
 
     @GetMapping("/changePassword")
     public String getChangePassword(Model model) {
@@ -51,10 +47,15 @@ public class UserController {
 
         if (loggedInUser != null) {
 
+            if (!passwordEncoder.matches(user.getPassword(), loggedInUser.getPassword()) && !user.getPassword().isEmpty()) {
+
+                model.addAttribute("error", "Stare hasło jest nieprawidłowe");
+                return "changePassword";
+            }
 
             if (user.getNewPassword() != null && !user.getNewPassword().isEmpty()) {
                 if (user.getNewPassword().equals(user.getPassword())) {
-                    bindingResult.addError(new FieldError("user", "newPassword", "Nowe hasło nie może być takie same jak wcześniej!"));
+                    bindingResult.addError(new FieldError("user", "newPassword", "Nowe hasło nie może być takie same jak stare hasło!"));
                 }
                 if (!user.getNewPassword().equals(user.getRpassword())) {
                     bindingResult.addError(new FieldError("user", "rpassword", "Nowe hasło nie zgadza się z powtórzeniem!"));
@@ -65,21 +66,14 @@ public class UserController {
                 return "changePassword";
             }
 
-            if (passwordEncoder.matches(user.getPassword(), loggedInUser.getPassword())) {
+            loggedInUser.setPassword(passwordEncoder.encode(user.getNewPassword()));
+            userService.saveUser(loggedInUser);
+            emailService.sendEmail(loggedInUser.getEmail(), "Zmiana hasła", "Twoje hasło zostało zmienione pomyślnie!");
+            redirectAttributes.addFlashAttribute("message", "Hasło zostało zmienione!");
 
-                loggedInUser.setPassword(passwordEncoder.encode(user.getNewPassword()));
-                userService.saveUser(loggedInUser);
-                emailService.sendEmail(loggedInUser.getEmail(), "Zmiana hasła", "Twoje hasło zostało zmienione pomyślnie!");
-                redirectAttributes.addFlashAttribute("message", "Hasło zostało zmienione!");
-
-                return "redirect:/user-data";
-            } else {
-                model.addAttribute("error", "Stare hasło jest nieprawidłowe");
-                return "changePassword";
-            }
+            return "redirect:/user-data";
         } else {
             return "redirect:/login";
         }
     }
-
 }
