@@ -7,6 +7,10 @@ import com.falright.falright.service.ReportService;
 import com.falright.falright.service.UserService;
 import com.falright.falright.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +19,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -105,6 +111,19 @@ public class AdminController {
         model.addAttribute("flightWithMostPassengers", reportService.getFlightWithMostPassengers());
 
         return "report";
+    }
+
+    @GetMapping("/admin/downloadReport")
+    public ResponseEntity<InputStreamResource> downloadReport() throws IOException {
+        ByteArrayInputStream excelStream = reportService.generateExcelReport();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "attachment; filename=report.xlsx");
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(new InputStreamResource(excelStream));
     }
 
 }
