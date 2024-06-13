@@ -2,10 +2,8 @@ package com.falright.falright.service;
 
 import com.falright.falright.model.Users;
 import com.falright.falright.repository.UserRepository;
-import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -63,10 +61,11 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public List<Users> getAllNonAdminUsers() { return userRepository.findByRoleNot(Users.Role.ADMIN); }
+
     public void assignRole(String username, Users.Role role) {
         Users user = userRepository.findUserByUsername(username).orElseThrow(() -> new RuntimeException("User not found"));
         user.setRole(role);
         userRepository.save(user);
     }
-
 }

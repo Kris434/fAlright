@@ -1,8 +1,6 @@
 package com.falright.falright.controller;
 
 import com.falright.falright.model.Users;
-import com.falright.falright.repository.AircraftRepository;
-import com.falright.falright.repository.FlightRepository;
 import com.falright.falright.service.ReportService;
 import com.falright.falright.service.UserService;
 import com.falright.falright.repository.UserRepository;
@@ -18,12 +16,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -56,12 +53,12 @@ public class AdminController {
 
             return "admin";
         }
-        else
-        {
+        else {
             return "home";
         }
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/updateRole")
     public String updateRole(HttpSession session, Model model,
                              @RequestParam("user") Integer userId,
@@ -82,28 +79,37 @@ public class AdminController {
         }
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/admin/assignRole")
-    public String showAssignRoleForm(Model model)
-    {
-        List<Users> users = userService.getAllUsers();
+    public String showAssignRoleForm(Model model) {
+
+        List<Users> users = userService.getAllNonAdminUsers();
+        List<Users.Role> roles = Arrays.stream(Users.Role.values())
+                .filter(role -> !role.equals(Users.Role.ADMIN))
+                        .collect(Collectors.toList());
+
         model.addAttribute("users", users);
+        model.addAttribute("roles", roles);
+
         return "assignRole";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/admin/assignRole")
     public String assignRole(RedirectAttributes redirectAttributes,
                              @RequestParam("username") String username,
-                             @RequestParam("role") Users.Role role)
-    {
+                             @RequestParam("role") Users.Role role) {
+
         userService.assignRole(username, role);
 
         redirectAttributes.addFlashAttribute("message", "Uprawnienie zostało zmienione!");
         return "redirect:/admin";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/admin/report")
-    public String generateReport(Model model)
-    {
+    public String generateReport(Model model) {
+
         model.addAttribute("aircraftWithMostFlights", reportService.getAircraftWithMostFlights());
         model.addAttribute("flightWithMostReservations", reportService.getFlightWithMostReservations());
         model.addAttribute("longestFlight", reportService.getLongestFlight());
@@ -113,8 +119,10 @@ public class AdminController {
         return "report";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/admin/downloadReport")
     public ResponseEntity<InputStreamResource> downloadReport() throws IOException {
+
         ByteArrayInputStream excelStream = reportService.generateExcelReport();
 
         HttpHeaders headers = new HttpHeaders();
@@ -125,5 +133,4 @@ public class AdminController {
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(new InputStreamResource(excelStream));
     }
-
 }

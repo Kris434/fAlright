@@ -28,9 +28,7 @@
             <div class="card-details">
                 <label for="role">Rola</label>
                 <select id="role" name="role">
-                    <option value="USER">USER</option>
-                    <option value="EMPLOYEE">EMPLOYEE</option>
-                    <option value="ADMIN">ADMIN</option>
+                    <option th:each="role : ${roles}" th:value="${role}" th:text="${role}"></option>
                 </select>
             </div>
 
