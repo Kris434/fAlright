@@ -8,6 +8,7 @@ import com.falright.falright.repository.FlightRepository;
 import com.falright.falright.repository.ReservationRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 

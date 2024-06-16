@@ -12,7 +12,27 @@
 
 <h1>Rezerwacja zakończona pomyślnie!</h1>
     <div>
-        <span th:text="${session.loggedInUser.getUsername()}"></span>
+        <p>Twoja rezerwacja została zakończona pomyślnie. Dziękujemy za skorzystanie z naszych usług.</p>
+        <p>W razie pytań prosimy o kontakt z naszym biurem obsługi klienta.</p>
+    </div>
+    <div>
+        <h3>Dane lotu:</h3>
+        <p>Lot z: <span th:text="${userReservation.getFlights_id().getDeparture_point()}"></span></p>
+        <p>Lot do: <span th:text="${userReservation.getFlights_id().getDestination()}"></span></p>
+        <p>Data wylotu: <span th:text="${#temporals.format(userReservation.getFlights_id().getDeparture_time(), 'yyyy-MM-dd HH:mm')}"></span></p>
+        <p>Data przylotu: <span th:text="${#temporals.format(userReservation.getFlights_id().getArrival_time(), 'yyyy-MM-dd HH:mm')}"></span></p>
+        <p>Cena biletu: <span th:text="${userReservation.getTotalPrice()}"></span></p>
+        <p>Samolot: <span th:text="${userReservation.getFlights_id().getAircrafts_id().getModel()}"></span></p>
+
+        <h3>Dane pasażera</h3>
+        <p>Imię: <span th:text="${userReservation.getPassengers_id().getName()}"></span></p>
+        <p>Nazwisko: <span th:text="${userReservation.getPassengers_id().getSurname()}"></span></p>
+        <p>Email: <span th:text="${userReservation.getPassengers_id().getEmail()}"></span></p>
+        <p>Numer telefonu: <span th:text="${userReservation.getPassengers_id().getPhone_number()}"></span></p>
+        <p>Adres: <span th:text="${userReservation.getPassengers_id().getAddress()}"></span></p>
+        <p>Kod pocztowy: <span th:text="${userReservation.getPassengers_id().getPost_code()}"></span></p>
+        <p>Miasto: <span th:text="${userReservation.getPassengers_id().getCity()}"></span></p>
+        <p>Bagaż: <span th:text="${userReservation.getBaggage()}"></span></p>
     </div>
 </body>
 </html>

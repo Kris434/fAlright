@@ -13,7 +13,7 @@
 <body>
 
     <div class="flights-container">
-        <div class="flights" th:each="flight : ${flights}">
+        <div class="flights" th:each="flight : ${flights}" th:if="${flight.getStatus() == true}">
             <div  class="flight-info">
                 <div class="info">
                     <strong>

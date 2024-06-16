@@ -143,6 +143,7 @@ public class EmployeeController {
             }
 
             flight.setAircrafts_id(aircraft);
+            flight.setStatus(true);
             flightRepository.save(flight);
 
             List<Reservations> reservationList = new ArrayList<>();

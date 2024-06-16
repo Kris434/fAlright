@@ -129,7 +129,9 @@ public class ReservationController {
 
         emailService.sendEmail(passenger.getEmail(), "Rezerwacja przebiegła pomyślnie!", messageContent);
 
-        return "home";
+        model.addAttribute("userReservation", reservation);
+
+        return "reservation-success";
     }
 
     @GetMapping("/your-reservations")

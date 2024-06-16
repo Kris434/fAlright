@@ -2,6 +2,7 @@ package com.falright.falright.repository;
 
 import com.falright.falright.model.Flights;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -52,5 +53,6 @@ public interface FlightRepository extends JpaRepository<Flights, Integer>
             "FROM Flights f JOIN Reservations r ON f.flight_id = r.flights_id.flight_id " +
             "GROUP BY f.departure_point, f.destination ORDER BY num_passengers DESC")
     List<Object[]> findFlightWithMostPassengers();
+
 }
 

@@ -40,6 +40,8 @@ public class Flights {
     @Positive(message = "Cena musi być większa od zera")
     private Double price;
 
+    private Boolean status;
+
     @ManyToOne
     @JoinColumn(name = "aircraft_id")
     private Aircrafts aircrafts_id;
