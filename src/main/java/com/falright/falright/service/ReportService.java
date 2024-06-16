@@ -71,7 +71,12 @@ public class ReportService {
         for (Object[] rowData : data) {
             Row row = sheet.createRow(rowIdx++);
             for (int colIdx = 0; colIdx < rowData.length; colIdx++) {
-                row.createCell(colIdx).setCellValue(rowData[colIdx].toString());
+                Cell cell = row.createCell(colIdx);
+                if (rowData[colIdx] != null) {
+                    cell.setCellValue(rowData[colIdx].toString());
+                } else {
+                    cell.setCellValue("");
+                }
             }
         }
     }

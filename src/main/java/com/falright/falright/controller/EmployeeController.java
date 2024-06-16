@@ -16,6 +16,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -113,8 +115,18 @@ public class EmployeeController {
         if(user != null && user.getRole() == Users.Role.EMPLOYEE) {
 
             if(flight.getDeparture_time() != null && flight.getArrival_time() != null) {
+
+                LocalDateTime now = LocalDateTime.now();
+
                 if(flight.getDeparture_time().isAfter(flight.getArrival_time())) {
                     bindingResult.addError(new FieldError("flight", "departure_time", "Data wylotu musi być przed datą przylotu!"));
+                }
+
+                if(flight.getDeparture_time().isBefore(now)) {
+                    bindingResult.addError(new FieldError("flight", "departure_time", "Data wylotu musi być w przyszłości!"));
+                }
+                if(flight.getArrival_time().isBefore(now)) {
+                    bindingResult.addError(new FieldError("flight", "arrival_time", "Data przylotu musi być w przyszłości!"));
                 }
             }
 

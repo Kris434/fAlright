@@ -21,12 +21,12 @@ public class Flights {
     private Integer flight_id;
 
     @NotNull(message = "Data wylotu nie może być pusta!")
-    @Future(message = "Data wylotu musi być w przyszłości!")
+
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime departure_time;
 
     @NotNull(message = "Data przylotu nie może być pusta!")
-    @Future(message = "Data przylotu musi być w przyszłości!")
+
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime arrival_time;
 
