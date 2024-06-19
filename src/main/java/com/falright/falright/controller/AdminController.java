@@ -5,10 +5,6 @@ import com.falright.falright.service.ReportService;
 import com.falright.falright.service.UserService;
 import com.falright.falright.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,8 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,13 +22,11 @@ public class AdminController {
 
     private final UserRepository userRepository;
     private final UserService userService;
-    private final ReportService reportService;
 
-    public AdminController(UserService userService, UserRepository userRepository, ReportService reportService)
-    {
+
+    public AdminController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
         this.userRepository = userRepository;
-        this.reportService = reportService;
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -106,31 +98,4 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/admin/report")
-    public String generateReport(Model model) {
-
-        model.addAttribute("aircraftWithMostFlights", reportService.getAircraftWithMostFlights());
-        model.addAttribute("flightWithMostReservations", reportService.getFlightWithMostReservations());
-        model.addAttribute("longestFlight", reportService.getLongestFlight());
-        model.addAttribute("mostExpensiveFlight", reportService.getMostExpensiveFlight());
-        model.addAttribute("flightWithMostPassengers", reportService.getFlightWithMostPassengers());
-
-        return "report";
-    }
-
-    @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/admin/downloadReport")
-    public ResponseEntity<InputStreamResource> downloadReport() throws IOException {
-
-        ByteArrayInputStream excelStream = reportService.generateExcelReport();
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Disposition", "attachment; filename=report.xlsx");
-
-        return ResponseEntity.ok()
-                .headers(headers)
-                .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                .body(new InputStreamResource(excelStream));
-    }
 }

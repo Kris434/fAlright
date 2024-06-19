@@ -25,19 +25,15 @@ public class ReportService {
     public List<Object[]> getAircraftWithMostFlights() {
         return flightRepository.findAircraftWithMostFlights();
     }
-
     public List<Object[]> getFlightWithMostReservations() {
         return flightRepository.findFlightWithMostReservations();
     }
-
     public List<Object[]> getLongestFlight() {
         return flightRepository.findLongestFlight();
     }
-
     public List<Object[]> getMostExpensiveFlight() {
         return flightRepository.findMostExpensiveFlight();
     }
-
     public List<Object[]> getFlightWithMostPassengers() {
         return flightRepository.findFlightWithMostPassengers();
     }

@@ -16,8 +16,6 @@
             <div class="top-row">
                 <h1>Panel administracyjny</h1>
                 <button onclick="window.location.href='/admin/assignRole'" class="sub-header">Uprawnienia</button>
-                <button onclick="window.location.href='/admin/report'" class="sub-header">Raport</button>
-                <button onclick="window.location.href='/admin/downloadReport'" class="sub-header">Pobierz Raport</button>
             </div>
 
             <div th:if="${message}" th:text="${message}" class="message"></div>

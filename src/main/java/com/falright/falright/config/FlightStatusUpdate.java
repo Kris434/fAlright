@@ -18,18 +18,16 @@ public class FlightStatusUpdate {
         this.flightRepository = flightRepository;
     }
 
-    @Scheduled(cron = "0/10 * * * * *")
+    @Scheduled(cron = "0 0/30 * * * *")
     public void updateFlightsStatus() {
         List<Flights> flights = flightRepository.findAll();
         LocalDateTime now = LocalDateTime.now();
 
         for (Flights flight : flights) {
-            if (flight.getDeparture_time().isAfter(now))
-            {
+            if (flight.getDeparture_time().isAfter(now)) {
                 flight.setStatus(true);
             }
-            else
-            {
+            else {
                 flight.setStatus(false);
             }
 

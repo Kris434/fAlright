@@ -17,6 +17,8 @@
             <h1>Panel pracownika</h1>
             <button onclick="window.location.href='/employee/addAircraft'" class="sub-header">Dodaj samolot</button>
             <button onclick="window.location.href='/employee/addFlight'" class="sub-header">Dodaj lot</button>
+            <button onclick="window.location.href='/employee/report'" class="sub-header">Raport</button>
+            <button onclick="window.location.href='/employee/downloadReport'" class="sub-header">Pobierz Raport</button>
         </div>
 
         <div th:if="${message}" th:text="${message}" class="message"></div>

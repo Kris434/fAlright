@@ -7,8 +7,13 @@ import com.falright.falright.model.Users;
 import com.falright.falright.repository.AircraftRepository;
 import com.falright.falright.repository.FlightRepository;
 import com.falright.falright.repository.ReservationRepository;
+import com.falright.falright.service.ReportService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +21,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,13 +32,15 @@ public class EmployeeController {
     private final AircraftRepository aircraftRepository;
     private final FlightRepository flightRepository;
     private final ReservationRepository reservationRepository;
+    private final ReportService reportService;
 
     public EmployeeController(AircraftRepository aircraftRepository, FlightRepository flightRepository,
-                              ReservationRepository reservationRepository) {
+                              ReservationRepository reservationRepository, ReportService reportService) {
 
         this.aircraftRepository = aircraftRepository;
         this.flightRepository = flightRepository;
         this.reservationRepository = reservationRepository;
+        this.reportService = reportService;
     }
 
     @PreAuthorize("hasRole('EMPLOYEE')")
@@ -166,6 +174,34 @@ public class EmployeeController {
         else {
             return "home";
         }
+    }
+
+    @PreAuthorize("hasRole('EMPLOYEE')")
+    @GetMapping("/employee/report")
+    public String generateReport(Model model) {
+
+        model.addAttribute("aircraftWithMostFlights", reportService.getAircraftWithMostFlights());
+        model.addAttribute("flightWithMostReservations", reportService.getFlightWithMostReservations());
+        model.addAttribute("longestFlight", reportService.getLongestFlight());
+        model.addAttribute("mostExpensiveFlight", reportService.getMostExpensiveFlight());
+        model.addAttribute("flightWithMostPassengers", reportService.getFlightWithMostPassengers());
+
+        return "report";
+    }
+
+    @PreAuthorize("hasRole('EMPLOYEE')")
+    @GetMapping("/employee/downloadReport")
+    public ResponseEntity<InputStreamResource> downloadReport() throws IOException {
+
+        ByteArrayInputStream excelStream = reportService.generateExcelReport();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "attachment; filename=report.xlsx");
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(new InputStreamResource(excelStream));
     }
 
 }
