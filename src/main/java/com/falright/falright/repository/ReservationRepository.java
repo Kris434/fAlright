@@ -1,9 +1,7 @@
 package com.falright.falright.repository;
 
 import com.falright.falright.model.Flights;
-import com.falright.falright.model.Passengers;
 import com.falright.falright.model.Reservations;
-import com.falright.falright.model.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

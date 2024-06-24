@@ -4,7 +4,6 @@ import com.falright.falright.model.Users;
 import com.falright.falright.repository.ValidationGroups;
 import com.falright.falright.service.EmailServiceImpl;
 import com.falright.falright.service.UserService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;

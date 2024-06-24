@@ -28,5 +28,4 @@ public class Passengers {
     @JoinColumn(name = "user_id")
     private Users users_id;
 
-
 }

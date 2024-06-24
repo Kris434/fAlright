@@ -1,5 +1,6 @@
 package com.falright.falright.controller;
 
+import com.falright.falright.DTO.ReservationForm;
 import com.falright.falright.model.Flights;
 import com.falright.falright.model.Passengers;
 import com.falright.falright.model.Reservations;
@@ -9,22 +10,24 @@ import com.falright.falright.repository.PassengersRepository;
 import com.falright.falright.repository.ReservationRepository;
 import com.falright.falright.service.EmailServiceImpl;
 import jakarta.servlet.http.HttpSession;
-import org.apache.catalina.User;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Controller
 public class ReservationController {
 
-    @Autowired private EmailServiceImpl emailService;
+    @Autowired
+    private EmailServiceImpl emailService;
     private final FlightRepository flightsRepository;
     private final PassengersRepository passengersRepository;
     private final ReservationRepository reservationRepository;
@@ -36,7 +39,8 @@ public class ReservationController {
     }
 
     @PostMapping("/reservation")
-    public String showReservationForm(HttpSession session, @RequestParam("flightId") Integer flightId) {
+    public String showReservationForm(Model model, HttpSession session, @RequestParam("flightId") Integer flightId) {
+
         if (session.getAttribute("loggedInUser") != null) {
             Reservations reservations = new Reservations();
             Optional<Flights> optionalFlights = flightsRepository.findById(flightId);
@@ -47,17 +51,37 @@ public class ReservationController {
             session.setAttribute("reservation", reservations);
             session.setAttribute("flightPrice", flights.getPrice());
 
+            model.addAttribute("form", new ReservationForm());
             return "reservation-form";
         }
-        else
-        {
+        else {
             return "home";
         }
     }
 
     @PostMapping("/personal-info")
-    public String getPersonalInfoReservation(Model model, HttpSession session, @RequestParam("firstName") String name, @RequestParam("lastName") String lastName, @RequestParam("phoneNumber") String phoneNumber, @RequestParam("email") String email, @RequestParam("city") String city, @RequestParam("postCode") String postCode, @RequestParam("address") String address, @RequestParam("baggage") String baggage)
-    {
+    public String addReservation(Model model, HttpSession session,
+                                 @Valid @ModelAttribute("form") ReservationForm form,
+                                 BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+
+        if (StringUtils.hasText(form.getPhoneNumber())) {
+            if (form.getPhoneNumber().length() != 9) {
+                bindingResult.addError(new FieldError("phoneNumber", "phoneNumber", "Numer telefonu musi składać się z 9 cyfr"));
+            }
+        }
+
+        if (StringUtils.hasText(form.getPostCode())) {
+            if (!form.getPostCode().matches("\\d{2}-\\d{3}")) {
+                bindingResult.rejectValue("postCode", "postCode", "Kod pocztowy musi mieć format XX-XXX");
+            }
+        }
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("form", form);
+            return "reservation-form";
+        }
+
+
         Reservations reservation = (Reservations) session.getAttribute("reservation");
         Double flightPrice = (Double) session.getAttribute("flightPrice");
         Passengers passenger = new Passengers();
@@ -66,25 +90,15 @@ public class ReservationController {
         List<Reservations> list = reservationRepository.findByFlightId(reservation.getFlights_id());
         model.addAttribute("seats", list);
 
-        passenger.setName(name);
-        passenger.setSurname(lastName);
-        passenger.setPhone_number(Integer.parseInt(phoneNumber));
+        passenger.setName(form.getFirstName());
+        passenger.setSurname(form.getLastName());
+        passenger.setPhone_number(Integer.valueOf(form.getPhoneNumber()));
         passenger.setUsers_id(user);
-        passenger.setAddress(address);
-        passenger.setCity(city);
-        passenger.setEmail(email);
+        passenger.setAddress(form.getAddress());
+        passenger.setCity(form.getCity());
+        passenger.setEmail(form.getEmail());
 
-        if(postCode.length() == 6)
-        {
-            passenger.setPost_code(postCode);
-        }
-        else
-        {
-            return "reservation-form";
-        }
-
-        switch (baggage)
-        {
+        switch (form.getBaggage()) {
             case "PODRECZNY":
                 session.setAttribute("totalPrice", flightPrice + 40.0);
                 break;
@@ -97,7 +111,7 @@ public class ReservationController {
         }
 
         reservation.setPassengers_id(passenger);
-        reservation.setBaggage(Reservations.Baggage.valueOf(baggage));
+        reservation.setBaggage(Reservations.Baggage.valueOf(form.getBaggage()));
 
         passengersRepository.save(passenger);
 

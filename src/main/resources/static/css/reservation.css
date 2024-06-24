@@ -62,3 +62,17 @@ a {
     color: #007bff;
     text-decoration: none;
 }
+
+.invalid-feedback {
+    color: red;
+    font-size: 14px;
+    text-align: left;
+    margin-top: 5px;
+    display: block;
+    clear: both;
+}
+
+.message{
+    color: white;
+    text-align: center;
+}

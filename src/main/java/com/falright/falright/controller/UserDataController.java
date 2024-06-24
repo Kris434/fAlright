@@ -1,7 +1,6 @@
 package com.falright.falright.controller;
 
 import com.falright.falright.model.Users;
-import com.falright.falright.service.EmailServiceImpl;
 import com.falright.falright.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;

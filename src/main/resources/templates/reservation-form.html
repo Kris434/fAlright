@@ -9,61 +9,66 @@
     <link rel="stylesheet" href="/css/reservation.css">
 </head>
 <body>
+    <header th:replace="~{fragments/header :: header}"></header>
 
-<header th:replace="~{fragments/header :: header}"></header>
+    <div class="reservation-container">
+        <h1 class="reservation-title">Rezerwacja lotu</h1>
 
-<div class="reservation-container">
-    <h1 class="reservation-title">Rezerwacja lotu</h1>
+        <form th:action="@{/personal-info}" th:object="${form}" method="post" class="reservation-form">
 
-    <form th:action="@{/personal-info}" method="post" class="reservation-form">
-        <input type="hidden" name="flightId" value="123"> <!-- Przykładowe ID lotu -->
-        <div>
-            <label for="firstName" class="form-label">Imię:</label>
-            <input type="text" id="firstName" name="firstName" class="form-input" required>
-        </div>
+            <div>
+                <label for="firstName" class="form-label">Imię:</label>
+                <input type="text" id="firstName" name="firstName" class="form-input" th:field="${form.firstName}">
+                <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="invalid-feedback"></div>
+            </div>
 
-        <div>
-            <label for="lastName" class="form-label">Nazwisko:</label>
-            <input type="text" id="lastName" name="lastName" class="form-input" required>
-        </div>
+            <div>
+                <label for="lastName" class="form-label">Nazwisko:</label>
+                <input type="text" id="lastName" name="lastName" class="form-input" th:field="${form.lastName}">
+                <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="invalid-feedback"></div>
+            </div>
 
-        <div>
-            <label for="email" class="form-label">Adres E-mail:</label>
-            <input type="email" id="email" name="email" class="form-input" th:value="${session.loggedInUser.getEmail()}"  required>
-        </div>
+            <div>
+                <label for="email" class="form-label">Adres E-mail:</label>
+                <input id="email" name="email" class="form-input" th:value="${session.loggedInUser.getEmail()}">
+                <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="invalid-feedback"></div>
+            </div>
 
-        <div>
-            <label for="phoneNumber" class="form-label">Numer telefonu:</label>
-            <input type="tel" id="phoneNumber" name="phoneNumber" class="form-input" required>
-        </div>
+            <div>
+                <label for="phoneNumber" class="form-label">Numer telefonu:</label>
+                <input type="tel" id="phoneNumber" name="phoneNumber" class="form-input" th:field="${form.phoneNumber}">
+                <div th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="invalid-feedback"></div>
+            </div>
 
-        <div>
-            <label for="address" class="form-label">Adres:</label>
-            <input type="text" id="address" name="address" class="form-input" required>
-        </div>
+            <div>
+                <label for="address" class="form-label">Adres:</label>
+                <input type="text" id="address" name="address" class="form-input" th:field="${form.address}">
+                <div th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="invalid-feedback"></div>
+            </div>
 
-        <div>
-            <label for="postCode" class="form-label">Kod pocztowy:</label>
-            <input type="text" id="postCode" name="postCode" class="form-input" placeholder="00-000" required>
-        </div>
+            <div>
+                <label for="postCode" class="form-label">Kod pocztowy:</label>
+                <input type="text" id="postCode" name="postCode" class="form-input" th:field="${form.postCode}">
+                <div th:if="${#fields.hasErrors('postCode')}" th:errors="*{postCode}" class="invalid-feedback"></div>
+            </div>
 
-        <div>
-            <label for="city" class="form-label">Miasto:</label>
-            <input type="text" id="city" name="city" class="form-input" required>
-        </div>
+            <div>
+                <label for="city" class="form-label">Miasto:</label>
+                <input type="text" id="city" name="city" class="form-input" th:field="${form.city}">
+                <div th:if="${#fields.hasErrors('city')}" th:errors="*{city}" class="invalid-feedback"></div>
+            </div>
 
-        <div>
-            <label for="baggage" class="form-label">Bagaż:</label>
-            <select id="baggage" name="baggage" class="form-input">
-                <option selected value="BRAK">Brak bagażu</option>
-                <option value="PODRECZNY">Bagaż podręczny</option>
-                <option value="ZWYKLY">Bagaż zwykły</option>
-            </select>
-        </div>
+            <div>
+                <label for="baggage" class="form-label">Bagaż:</label>
+                <select id="baggage" name="baggage" class="form-input">
+                    <option selected value="BRAK">Brak bagażu</option>
+                    <option value="PODRECZNY">Bagaż podręczny</option>
+                    <option value="ZWYKLY">Bagaż zwykły</option>
+                </select>
+            </div>
 
-        <button type="submit" class="submit-button">Zarezerwuj</button>
-    </form>
-</div>
-
+            <button type="submit" class="submit-button">Zarezerwuj</button>
+        </form>
+    </div>
 </body>
 </html>

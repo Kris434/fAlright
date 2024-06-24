@@ -1,7 +1,6 @@
 package com.falright.falright.controller;
 
 import com.falright.falright.model.Users;
-import com.falright.falright.service.ReportService;
 import com.falright.falright.service.UserService;
 import com.falright.falright.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
