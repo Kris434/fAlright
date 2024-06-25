@@ -26,8 +26,7 @@ body {
     align-items: flex-start;
     justify-content: space-between;
     width: 100%;
-    max-width: 500px;
-    background-color: #68BBE3;
+    max-width: 480px;
     border-radius: 10px;
     margin-top: 70px;
 }
@@ -148,4 +147,26 @@ body {
 .message{
     color: white;
     text-align: center;
+}
+
+.sub-header
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: 100%;
+    font-size: 17px;
+    color: #fff;
+    border-radius: 10px;
+    background-color: #5a77e6;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.5s;
+    border: none;
+}
+
+.sub-header:hover
+{
+    background-color: #4395DC;
 }

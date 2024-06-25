@@ -59,6 +59,46 @@ h1 {
 }
 
 .card-details span {
-    font-size: 15px;
-    color: #333;
+    font-size: 17px;
+    color: #fff;
 }
+
+.sub-header
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: 100%;
+    font-size: 17px;
+    color: #fff;
+    border-radius: 10px;
+    background-color: #5a77e6;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.5s;
+    border: none;
+}
+
+.sub-header:hover
+{
+    background-color: #4395DC;
+}
+
+.card-details
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 100%;
+    font-size: 17px;
+    color: #fff;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.5s;
+    border: none;
+}
+
+
