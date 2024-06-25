@@ -204,4 +204,26 @@ public class EmployeeController {
                 .body(new InputStreamResource(excelStream));
     }
 
+    @PreAuthorize("hasRole('EMPLOYEE')")
+    @GetMapping("/employee/showFlights")
+    public String showFlights(Model model) {
+
+        model.addAttribute("flights", flightRepository.findAll());
+        return "showFlight";
+    }
+
+    @PreAuthorize("hasRole('EMPLOYEE')")
+    @PostMapping("/employee/deleteFlight")
+    public String deleteFlight(@RequestParam("id") Integer id, RedirectAttributes redirectAttributes) {
+
+        Flights flight = flightRepository.findById(id).orElse(null);
+
+        if(flight != null) {
+            flight.setStatus(false);
+            flightRepository.save(flight);
+            redirectAttributes.addFlashAttribute("message", "Lot został usunięty pomyślnie!");
+        }
+
+        return "redirect:/employee";
+    }
 }
