@@ -10,6 +10,7 @@ import com.falright.falright.repository.ReservationRepository;
 import com.falright.falright.service.ReportService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import org.hibernate.Session;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -178,15 +179,22 @@ public class EmployeeController {
 
     @PreAuthorize("hasRole('EMPLOYEE')")
     @GetMapping("/employee/report")
-    public String generateReport(Model model) {
+    public String generateReport(HttpSession session, Model model) {
+        Users user = (Users) session.getAttribute("loggedInUser");
+        if(user != null && user.getRole() == Users.Role.EMPLOYEE)
+        {
+            model.addAttribute("aircraftWithMostFlights", reportService.getAircraftWithMostFlights());
+            model.addAttribute("flightWithMostReservations", reportService.getFlightWithMostReservations());
+            model.addAttribute("longestFlight", reportService.getLongestFlight());
+            model.addAttribute("mostExpensiveFlight", reportService.getMostExpensiveFlight());
+            model.addAttribute("flightWithMostPassengers", reportService.getFlightWithMostPassengers());
 
-        model.addAttribute("aircraftWithMostFlights", reportService.getAircraftWithMostFlights());
-        model.addAttribute("flightWithMostReservations", reportService.getFlightWithMostReservations());
-        model.addAttribute("longestFlight", reportService.getLongestFlight());
-        model.addAttribute("mostExpensiveFlight", reportService.getMostExpensiveFlight());
-        model.addAttribute("flightWithMostPassengers", reportService.getFlightWithMostPassengers());
-
-        return "report";
+            return "report";
+        }
+        else
+        {
+            return "home";
+        }
     }
 
     @PreAuthorize("hasRole('EMPLOYEE')")
@@ -206,54 +214,80 @@ public class EmployeeController {
 
     @PreAuthorize("hasRole('EMPLOYEE')")
     @GetMapping("/employee/showFlights")
-    public String showFlights(Model model) {
-
-        model.addAttribute("flights", flightRepository.findAll());
-        return "showFlight";
+    public String showFlights(HttpSession session, Model model) {
+        Users user = (Users) session.getAttribute("loggedInUser");
+        if(user != null && user.getRole() == Users.Role.EMPLOYEE)
+        {
+            model.addAttribute("flights", flightRepository.findAll());
+            return "showFlight";
+        }
+        else {
+            return "home";
+        }
     }
 
     @PreAuthorize("hasRole('EMPLOYEE')")
     @PostMapping("/employee/deleteFlight")
-    public String deleteFlight(@RequestParam("id") Integer id, RedirectAttributes redirectAttributes) {
+    public String deleteFlight(HttpSession session, @RequestParam("id") Integer id, RedirectAttributes redirectAttributes) {
+        Users user = (Users) session.getAttribute("loggedInUser");
+        if(user != null && user.getRole() == Users.Role.EMPLOYEE)
+        {
+            Flights flight = flightRepository.findById(id).orElse(null);
 
-        Flights flight = flightRepository.findById(id).orElse(null);
+            if (flight != null) {
+                flight.setStatus(false);
+                flightRepository.save(flight);
+                redirectAttributes.addFlashAttribute("message", "Lot został usunięty pomyślnie!");
+            }
 
-        if(flight != null) {
-            flight.setStatus(false);
-            flightRepository.save(flight);
-            redirectAttributes.addFlashAttribute("message", "Lot został usunięty pomyślnie!");
+            return "redirect:/employee";
+        }
+        else
+        {
+            return "home";
         }
 
-        return "redirect:/employee";
     }
 
     @PreAuthorize("hasRole('EMPLOYEE')")
     @GetMapping("/employee/showAircrafts")
-    public String showAircrafts(Model model) {
-
-        model.addAttribute("aircrafts", aircraftRepository.findAll());
-        return "showAircrafts";
+    public String showAircrafts(HttpSession session, Model model) {
+        Users user = (Users) session.getAttribute("loggedInUser");
+        if(user != null && user.getRole() == Users.Role.EMPLOYEE)
+        {
+            model.addAttribute("aircrafts", aircraftRepository.findAll());
+            return "showAircrafts";
+        }
+        else {
+            return "home";
+        }
     }
 
     @PreAuthorize("hasRole('EMPLOYEE')")
     @PostMapping("/employee/deleteAircraft")
-    public String deleteAircraft(@RequestParam("aircraftId") Integer id, RedirectAttributes redirectAttributes) {
+    public String deleteAircraft(HttpSession session, @RequestParam("aircraftId") Integer id, RedirectAttributes redirectAttributes) {
+        Users user = (Users) session.getAttribute("loggedInUser");
+            if(user != null && user.getRole() == Users.Role.EMPLOYEE)
+            {
+                Aircrafts aircraft = aircraftRepository.findById(id).orElse(null);
 
-        Aircrafts aircraft = aircraftRepository.findById(id).orElse(null);
+                if(aircraft != null) {
+                    List<Flights> flights = flightRepository.findFlightsByAircraft(aircraft);
 
-        if(aircraft != null) {
-            List<Flights> flights = flightRepository.findFlightsByAircraft(aircraft);
+                    for(Flights flight : flights) {
+                        flight.setStatus(false);
+                        flightRepository.save(flight);
+                    }
 
-            for(Flights flight : flights) {
-                flight.setStatus(false);
-                flightRepository.save(flight);
+                    aircraft.setStatus(false);
+                    aircraftRepository.save(aircraft);
+                    redirectAttributes.addFlashAttribute("message", "Samolot został usunięty pomyślnie!");
+                }
+
+                return "redirect:/employee";
             }
-
-            aircraft.setStatus(false);
-            aircraftRepository.save(aircraft);
-            redirectAttributes.addFlashAttribute("message", "Samolot został usunięty pomyślnie!");
-        }
-
-        return "redirect:/employee";
+            else {
+                return "home";
+            }
     }
 }

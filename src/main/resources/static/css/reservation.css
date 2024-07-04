@@ -39,6 +39,10 @@ body {
     margin-bottom: 20px;
 }
 
+td {
+    padding: 0 10px;
+}
+
 .display-flex {
     display: flex;
     flex-direction: row;
