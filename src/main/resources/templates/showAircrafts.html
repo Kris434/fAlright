@@ -9,24 +9,23 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
+    <header th:replace="~{fragments/header :: header}"></header>
 
-<header th:replace="~{fragments/header :: header}"></header>
+    <div class="reservation-container">
+        <h1 class="reservation-title">Dostępne samoloty</h1>
 
-<div class="reservation-container">
-    <h1 class="reservation-title">Dostępne samoloty</h1>
+        <h5>Usunięcie samolotu spowoduje usunięcie powiązanych z nim lotów!</h5>
 
-    <h5>Usunięcie samolotu spowoduje usunięcie powiązanych z nim lotów!</h5>
+        <div th:each="aircraft : ${aircrafts}" th:if="${aircraft.getStatus() != false}">
+            <hr>
 
-    <div th:each="aircraft : ${aircrafts}" th:if="${aircraft.getStatus() != false}">
-        <hr>
-
-        <form th:action="@{/employee/deleteAircraft}" method="post" class="reservation-form display-flex">
-            <label class="form-label"><span class="form-input bold-text" style="font-size: 20px" th:text="${aircraft.getModel() + ', Ilość miejsc: ' + aircraft.getCapacity()}"></span></label>
-            <input type="hidden" name="aircraftId" th:value="${aircraft.getAircraft_id()}"/>
-            <button type="submit" class="delete-btn btn btn-outline-danger">Usuń</button>
-        </form>
+            <form th:action="@{/employee/deleteAircraft}" method="post" class="reservation-form display-flex">
+                <label class="form-label"><span class="form-input bold-text" style="font-size: 20px" th:text="${aircraft.getModel() + ', Ilość miejsc: ' + aircraft.getCapacity()}"></span></label>
+                <input type="hidden" name="aircraftId" th:value="${aircraft.getAircraft_id()}"/>
+                <button type="submit" class="delete-btn btn btn-outline-danger">Usuń</button>
+            </form>
+        </div>
     </div>
-</div>
 
 </body>
 </html>

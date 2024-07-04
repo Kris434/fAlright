@@ -8,63 +8,62 @@
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/footer.css">
 </head>
-<header th:replace="~{fragments/header :: header}"></header>
 
 <body>
-<div class="container">
-    <div class="card">
-        <div class="top-row">
-            <h1>Dodaj Lot</h1>
+    <header th:replace="~{fragments/header :: header}"></header>
+    <div class="container">
+        <div class="card">
+            <div class="top-row">
+                <h1>Dodaj Lot</h1>
+            </div>
+
+            <form th:action="@{/employee/addFlight}" th:object="${flight}" method="post">
+
+                <div class="card-details">
+                    <label for="depTime">Czas wylotu</label>
+                    <input id="depTime" th:field="*{departure_time}" name="depTime" type="datetime-local" placeholder="Wybierz czas wylotu">
+                    <div th:if="${#fields.hasErrors('departure_time')}" th:errors="*{departure_time}" class="invalid-feedback"></div>
+                </div>
+
+                <div class="card-details">
+                    <label for="departurePoint">Miejsce wylotu</label>
+                    <input id="departurePoint" th:field="*{departure_point}" name="departurePoint" type="text" placeholder="Wybierz miejsce wylotu">
+                    <div th:if="${#fields.hasErrors('departure_point')}" th:errors="*{departure_point}" class="invalid-feedback"></div>
+                </div>
+
+                <div class="card-details">
+                    <label for="arrivalTime">Czas przylotu</label>
+                    <input id="arrivalTime" th:field="*{arrival_time}" name="arrivalTime" type="datetime-local" placeholder="Wybierz czas przylotu">
+                    <div th:if="${#fields.hasErrors('arrival_time')}" th:errors="*{arrival_time}" class="invalid-feedback"></div>
+                </div>
+
+                <div class="card-details">
+                    <label for="destination">Miejsce docelowe</label>
+                    <input id="destination" th:field="*{destination}" name="destination" type="text" placeholder="Wybierz miejsce docelowe">
+                    <div th:if="${#fields.hasErrors('destination')}" th:errors="*{destination}" class="invalid-feedback"></div>
+                </div>
+
+                <div class="card-details">
+                    <label for="price">Cena biletu</label>
+                    <input id="price" th:field="*{price}" name="price" type="number" placeholder="Wpisz cenę biletu">
+                    <div th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="invalid-feedback"></div>
+                </div>
+
+                <div class="card-details">
+                    <label for="aircraft">Samolot</label>
+                    <select id="aircraft" name="aircraftId">
+                        <option th:each="aircraft : ${session.aircrafts}" th:if="${aircraft.getStatus() == true}" th:value="${aircraft.aircraft_id}">
+                            <span th:text="${aircraft.model}"></span>
+                            <span>, </span>
+                            <span th:text="${aircraft.capacity}"></span>
+                        </option>
+                    </select>
+                </div>
+
+                <input type="submit" class="add-flight" value="Dodaj lot">
+            </form>
+
         </div>
-
-        <form th:action="@{/employee/addFlight}" th:object="${flight}" method="post">
-
-            <div class="card-details">
-                <label for="depTime">Czas wylotu</label>
-                <input id="depTime" th:field="*{departure_time}" name="depTime" type="datetime-local" placeholder="Wybierz czas wylotu">
-                <div th:if="${#fields.hasErrors('departure_time')}" th:errors="*{departure_time}" class="invalid-feedback"></div>
-            </div>
-
-            <div class="card-details">
-                <label for="departurePoint">Miejsce wylotu</label>
-                <input id="departurePoint" th:field="*{departure_point}" name="departurePoint" type="text" placeholder="Wybierz miejsce wylotu">
-                <div th:if="${#fields.hasErrors('departure_point')}" th:errors="*{departure_point}" class="invalid-feedback"></div>
-            </div>
-
-            <div class="card-details">
-                <label for="arrivalTime">Czas przylotu</label>
-                <input id="arrivalTime" th:field="*{arrival_time}" name="arrivalTime" type="datetime-local" placeholder="Wybierz czas przylotu">
-                <div th:if="${#fields.hasErrors('arrival_time')}" th:errors="*{arrival_time}" class="invalid-feedback"></div>
-            </div>
-
-            <div class="card-details">
-                <label for="destination">Miejsce docelowe</label>
-                <input id="destination" th:field="*{destination}" name="destination" type="text" placeholder="Wybierz miejsce docelowe">
-                <div th:if="${#fields.hasErrors('destination')}" th:errors="*{destination}" class="invalid-feedback"></div>
-            </div>
-
-            <div class="card-details">
-                <label for="price">Cena biletu</label>
-                <input id="price" th:field="*{price}" name="price" type="number" placeholder="Wpisz cenę biletu">
-                <div th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="invalid-feedback"></div>
-            </div>
-
-            <div class="card-details">
-                <label for="aircraft">Samolot</label>
-                <select id="aircraft" name="aircraftId">
-                    <option th:each="aircraft : ${session.aircrafts}" th:if="${aircraft.getStatus() == true}" th:value="${aircraft.aircraft_id}">
-                        <span th:text="${aircraft.model}"></span>
-                        <span>, </span>
-                        <span th:text="${aircraft.capacity}"></span>
-                    </option>
-                </select>
-            </div>
-
-            <input type="submit" class="add-flight" value="Dodaj lot">
-        </form>
-
     </div>
-</div>
-
 </body>
 </html>

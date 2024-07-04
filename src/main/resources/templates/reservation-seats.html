@@ -8,22 +8,21 @@
     <link rel="stylesheet" href="/css/header.css">
 </head>
 <body>
-<header th:replace="~{fragments/header :: header}"></header>
+    <header th:replace="~{fragments/header :: header}"></header>
 
-<div class="reservation-container">
-    <h1 class="reservation-title">Rezerwacja lotu</h1>
+    <div class="reservation-container">
+        <h1 class="reservation-title">Rezerwacja lotu</h1>
 
-    <form th:action="@{/finalize}" method="post" class="reservation-form">
-        <label for="seat" class="form-label">Numer siedzenia:</label>
-        <select id="seat" name="seat">
-            <option th:each="reservation : ${seats}" th:if="${reservation.getStatus() == false}">
-                <span th:text="${reservation.getSeat_number()}"></span>
-            </option>
-        </select>
+        <form th:action="@{/finalize}" method="post" class="reservation-form">
+            <label for="seat" class="form-label">Numer siedzenia:</label>
+            <select id="seat" name="seat">
+                <option th:each="reservation : ${seats}" th:if="${reservation.getStatus() == false}">
+                    <span th:text="${reservation.getSeat_number()}"></span>
+                </option>
+            </select>
 
-        <button type="submit" class="submit-button">Zarezerwuj</button>
-    </form>
-</div>
-
+            <button type="submit" class="submit-button">Zarezerwuj</button>
+        </form>
+    </div>
 </body>
 </html>

@@ -7,25 +7,25 @@
     <link rel="stylesheet"  href="/css/header.css">
 </head>
 <body>
-<header th:replace="~{fragments/header :: header}"></header>
-<main class="container">
-    <div class="card">
-        <h1>Profil Użytkownika</h1>
-        <div class="card-details">
-            <p><strong>Nazwa użytkownika:</strong> <span th:text="${session.loggedInUser.getUsername()}"></span></p>
-        </div>
-        <div class="card-details">
-            <p><strong>Email:</strong> <span th:text="${session.loggedInUser.getEmail()}"></span></p>
-        </div>
-        <div class="card-details">
-            <p><strong>Rola:</strong> <span th:text="${session.loggedInUser.getRole()}"></span></p>
-        </div>
-        <div class="card-actions">
-            <button onclick="window.location.href='/changePassword'" class="sub-header">Zmień hasło</button>
-        </div>
+    <header th:replace="~{fragments/header :: header}"></header>
+    <main class="container">
+        <div class="card">
+            <h1>Profil Użytkownika</h1>
+            <div class="card-details">
+                <p><strong>Nazwa użytkownika:</strong> <span th:text="${session.loggedInUser.getUsername()}"></span></p>
+            </div>
+            <div class="card-details">
+                <p><strong>Email:</strong> <span th:text="${session.loggedInUser.getEmail()}"></span></p>
+            </div>
+            <div class="card-details">
+                <p><strong>Rola:</strong> <span th:text="${session.loggedInUser.getRole()}"></span></p>
+            </div>
+            <div class="card-actions">
+                <button onclick="window.location.href='/changePassword'" class="sub-header">Zmień hasło</button>
+            </div>
 
-        <div th:if="${message}" th:text="${message}"></div>
-    </div>
-</main>
+            <div th:if="${message}" th:text="${message}"></div>
+        </div>
+    </main>
 </body>
 </html>

@@ -6,46 +6,47 @@
     <title>Register</title>
     <link rel="stylesheet" href="/css/register.css">
 </head>
+
 <body>
-<form method="post" th:action="@{/register}" th:object="${user}" >
-    <div class="container">
-        <div class="card">
-            <div class="top-row">
-                <h1>Załóż konto!</h1>
-                <p>Załóż nowe konto</p>
-            </div>
+    <form method="post" th:action="@{/register}" th:object="${user}" >
+        <div class="container">
+            <div class="card">
+                <div class="top-row">
+                    <h1>Załóż konto!</h1>
+                    <p>Załóż nowe konto</p>
+                </div>
 
-            <div class="card-details">
-                <i class="gg-mail"></i>
-                <input name="email" type="text" placeholder="Wpisz e-mail" th:value="*{email}" th:errorclass="is-invalid">
-                <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="invalid-feedback"></div>
-            </div>
+                <div class="card-details">
+                    <i class="gg-mail"></i>
+                    <input name="email" type="text" placeholder="Wpisz e-mail" th:value="*{email}" th:errorclass="is-invalid">
+                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="invalid-feedback"></div>
+                </div>
 
-            <div class="card-details">
-                <i class="gg-user"></i>
-                <input name="username" type="text" placeholder="Wpisz nazwę użytkownika" th:value="*{username}" th:errorclass="is-invalid">
-                <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="invalid-feedback"></div>
-            </div>
+                <div class="card-details">
+                    <i class="gg-user"></i>
+                    <input name="username" type="text" placeholder="Wpisz nazwę użytkownika" th:value="*{username}" th:errorclass="is-invalid">
+                    <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="invalid-feedback"></div>
+                </div>
 
-            <div class="card-details">
-                <i class="gg-lock"></i>
-                <input name="password" type="password" class="password-field" placeholder="Wpisz hasło" th:value="*{password}" th:errorclass="is-invalid">
-                <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="invalid-feedback"></div>
-                <span class="toggle-password"><i class="gg-eye"></i></span>
-            </div>
+                <div class="card-details">
+                    <i class="gg-lock"></i>
+                    <input name="password" type="password" class="password-field" placeholder="Wpisz hasło" th:value="*{password}" th:errorclass="is-invalid">
+                    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="invalid-feedback"></div>
+                    <span class="toggle-password"><i class="gg-eye"></i></span>
+                </div>
 
-            <div class="card-details">
-                <i class="gg-lock"></i>
-                <input name="rpassword" type="password" class="password-field" placeholder="Powtórz hasło" th:value="*{rpassword}" th:errorclass="is-invalid">
-                <div th:if="${#fields.hasErrors('rpassword')}" th:errors="*{rpassword}" class="invalid-feedback"></div>
-                <span class="toggle-password"><i class="gg-eye"></i></span>
-            </div>
+                <div class="card-details">
+                    <i class="gg-lock"></i>
+                    <input name="rpassword" type="password" class="password-field" placeholder="Powtórz hasło" th:value="*{rpassword}" th:errorclass="is-invalid">
+                    <div th:if="${#fields.hasErrors('rpassword')}" th:errors="*{rpassword}" class="invalid-feedback"></div>
+                    <span class="toggle-password"><i class="gg-eye"></i></span>
+                </div>
 
-            <input type="submit" class="sign-in" value="Załóż konto">
-            <p class="sign-up">Posiadasz już konto? <a href="/login"> Zaloguj się</a></p>
+                <input type="submit" class="sign-in" value="Załóż konto">
+                <p class="sign-up">Posiadasz już konto? <a href="/login"> Zaloguj się</a></p>
+            </div>
         </div>
-    </div>
-</form>
+    </form>
 <script src="/js/showPassword.js"></script>
 </body>
 </html>

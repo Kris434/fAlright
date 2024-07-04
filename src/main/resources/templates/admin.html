@@ -6,11 +6,10 @@
     <title>Panel Administracyjny</title>
     <link rel="stylesheet" href="/css/admin.css">
     <link rel="stylesheet"  href="/css/header.css">
-    <link rel="stylesheet"  href="/css/footer.css">
 </head>
-<header th:replace="~{fragments/header :: header}"></header>
-<body>
 
+<body>
+    <header th:replace="~{fragments/header :: header}"></header>
     <div class="container">
         <div class="card">
             <div class="top-row">
@@ -21,6 +20,5 @@
             <div th:if="${message}" th:text="${message}" class="message"></div>
         </div>
     </div>
-
 </body>
 </html>

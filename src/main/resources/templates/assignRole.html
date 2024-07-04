@@ -6,37 +6,34 @@
     <title>Panel Administracyjny</title>
     <link rel="stylesheet" href="/css/admin.css">
     <link rel="stylesheet"  href="/css/header.css">
-    <link rel="stylesheet"  href="/css/footer.css">
 </head>
-<header th:replace="~{fragments/header :: header}"></header>
+
 <body>
+    <header th:replace="~{fragments/header :: header}"></header>
+    <div class="container">
+        <div class="card">
+            <div class="top-row">
+                <h1>Nadawanie uprawnień użytkownikom</h1>
+            </div>
 
-<div class="container">
-    <div class="card">
-        <div class="top-row">
-            <h1>Nadawanie uprawnień użytkownikom</h1>
+            <form th:action="@{/admin/assignRole}" method="post">
+                <div class="card-details">
+                    <label for="username">Wybierz użytkownika</label>
+                    <select id="username" name="username">
+                        <option th:each="user : ${users}" th:value="${user.username}" th:text="${user.username}"></option>
+                    </select>
+                </div>
+
+                <div class="card-details">
+                    <label for="role">Rola</label>
+                    <select id="role" name="role">
+                        <option th:each="role : ${roles}" th:value="${role}" th:text="${role}"></option>
+                    </select>
+                </div>
+
+                <input type="submit" class="assign-role" value="Nadaj rolę">
+            </form>
         </div>
-
-        <form th:action="@{/admin/assignRole}" method="post">
-            <div class="card-details">
-                <label for="username">Wybierz użytkownika</label>
-                <select id="username" name="username">
-                    <option th:each="user : ${users}" th:value="${user.username}" th:text="${user.username}"></option>
-                </select>
-            </div>
-
-            <div class="card-details">
-                <label for="role">Rola</label>
-                <select id="role" name="role">
-                    <option th:each="role : ${roles}" th:value="${role}" th:text="${role}"></option>
-                </select>
-            </div>
-
-            <input type="submit" class="assign-role" value="Nadaj rolę">
-        </form>
     </div>
-</div>
-
-<footer th:replace="~{fragments/footer.html :: footer}"></footer>
 </body>
 </html>

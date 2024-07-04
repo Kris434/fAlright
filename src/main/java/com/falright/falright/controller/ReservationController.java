@@ -97,6 +97,7 @@ public class ReservationController {
         passenger.setAddress(form.getAddress());
         passenger.setCity(form.getCity());
         passenger.setEmail(form.getEmail());
+        passenger.setPost_code(form.getPostCode());
 
         switch (form.getBaggage()) {
             case "PODRECZNY":

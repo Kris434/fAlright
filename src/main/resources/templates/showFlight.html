@@ -8,23 +8,21 @@
     <link rel="stylesheet" href="/css/header.css">
 </head>
 <body>
+    <header th:replace="~{fragments/header :: header}"></header>
 
-<header th:replace="~{fragments/header :: header}"></header>
+    <div class="reservation-container">
+        <h1 class="reservation-title">Usuwanie lotu</h1>
 
-<div class="reservation-container">
-    <h1 class="reservation-title">Usuwanie lotu</h1>
+        <form th:action="@{/employee/deleteFlight}" method="post" class="reservation-form">
+            <label for="seat" class="form-label">Lot</label>
+            <select id="seat" name="id">
+                <option th:each="flight : ${flights}" th:if="${flight.getStatus() != false}" th:value="${flight.getFlight_id()}" >
+                    <span th:text="${flight.getDeparture_point() + ' ' + flight.getDeparture_time() + ' : ' + flight.getDestination() + ' ' + flight.getArrival_time()}"></span>
+                </option>
+            </select>
 
-    <form th:action="@{/employee/deleteFlight}" method="post" class="reservation-form">
-        <label for="seat" class="form-label">Lot</label>
-        <select id="seat" name="id">
-            <option th:each="flight : ${flights}" th:if="${flight.getStatus() != false}" th:value="${flight.getFlight_id()}" >
-                <span th:text="${flight.getDeparture_point() + ' ' + flight.getDeparture_time() + ' : ' + flight.getDestination() + ' ' + flight.getArrival_time()}"></span>
-            </option>
-        </select>
-
-        <button type="submit" class="submit-button">Usuń</button>
-    </form>
-</div>
-
+            <button type="submit" class="submit-button">Usuń</button>
+        </form>
+    </div>
 </body>
 </html>

@@ -6,26 +6,25 @@
     <title>Panel Administracyjny</title>
     <link rel="stylesheet" href="/css/employee.css">
     <link rel="stylesheet"  href="/css/header.css">
-    <link rel="stylesheet"  href="/css/footer.css">
 </head>
-<header th:replace="~{fragments/header :: header}"></header>
+
 
 <body>
-<div class="container">
-    <div class="card">
-        <div class="top-row">
-            <h1>Panel pracownika</h1>
-            <button onclick="window.location.href='/employee/addAircraft'" class="sub-header">Dodaj samolot</button>
-            <button onclick="window.location.href='/employee/addFlight'" class="sub-header">Dodaj lot</button>
-            <button onclick="window.location.href='/employee/report'" class="sub-header">Raport</button>
-            <button onclick="window.location.href='/employee/downloadReport'" class="sub-header">Pobierz Raport</button>
-            <button onclick="window.location.href='/employee/showFlights'" class="sub-header">Usuń lot</button>
-            <button onclick="window.location.href='/employee/showAircrafts'" class="sub-header">Wyświetl samoloty</button>
+    <header th:replace="~{fragments/header :: header}"></header>
+    <div class="container">
+        <div class="card">
+            <div class="top-row">
+                <h1>Panel pracownika</h1>
+                <button onclick="window.location.href='/employee/addAircraft'" class="sub-header">Dodaj samolot</button>
+                <button onclick="window.location.href='/employee/addFlight'" class="sub-header">Dodaj lot</button>
+                <button onclick="window.location.href='/employee/report'" class="sub-header">Raport</button>
+                <button onclick="window.location.href='/employee/downloadReport'" class="sub-header">Pobierz Raport</button>
+                <button onclick="window.location.href='/employee/showFlights'" class="sub-header">Usuń lot</button>
+                <button onclick="window.location.href='/employee/showAircrafts'" class="sub-header">Wyświetl samoloty</button>
+            </div>
+
+            <div th:if="${message}" th:text="${message}" class="message"></div>
         </div>
-
-        <div th:if="${message}" th:text="${message}" class="message"></div>
     </div>
-</div>
-
 </body>
 </html>
