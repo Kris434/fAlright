@@ -20,10 +20,10 @@
     <div th:each="aircraft : ${aircrafts}" th:if="${aircraft.getStatus() != false}">
         <hr>
 
-        <form th:action="@{/employee/deleteAircraft}" method="post" class="reservation-form">
-            <label class="form-label"><span class="form-input" th:text="${aircraft.getModel() + ', Ilość miejsc: ' + aircraft.getCapacity()}"></span></label>
+        <form th:action="@{/employee/deleteAircraft}" method="post" class="reservation-form display-flex">
+            <label class="form-label"><span class="form-input bold-text" style="font-size: 20px" th:text="${aircraft.getModel() + ', Ilość miejsc: ' + aircraft.getCapacity()}"></span></label>
             <input type="hidden" name="aircraftId" th:value="${aircraft.getAircraft_id()}"/>
-            <button type="submit" class="btn btn-outline-danger">Usuń</button>
+            <button type="submit" class="delete-btn btn btn-outline-danger">Usuń</button>
         </form>
     </div>
 </div>
