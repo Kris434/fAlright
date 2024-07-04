@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rezerwacja zakończona</title>
     <link rel="stylesheet" href="/css/reservation-finalize.css">
-    <link rel="stylesheet"  href="/css/header.css">
+    <link rel="stylesheet" href="/css/header.css">
 </head>
 <header th:replace="~{fragments/header :: header}"></header>
 <body>
 
-<h1>Rezerwacja zakończona pomyślnie!</h1>
+<div class="container">
+    <h1>Rezerwacja zakończona pomyślnie!</h1>
     <div>
         <p>Twoja rezerwacja została zakończona pomyślnie. Dziękujemy za skorzystanie z naszych usług.</p>
         <p>W razie pytań prosimy o kontakt z naszym biurem obsługi klienta.</p>
@@ -34,5 +35,7 @@
         <p>Miasto: <span th:text="${userReservation.getPassengers_id().getCity()}"></span></p>
         <p>Bagaż: <span th:text="${userReservation.getBaggage()}"></span></p>
     </div>
+</div>
+
 </body>
 </html>

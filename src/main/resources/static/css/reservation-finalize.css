@@ -24,6 +24,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     font-family: 'Poppins', sans-serif;
+    text-align: left;  /* Ensure all text is aligned to the left */
 }
 
 .container h1 {
@@ -38,6 +39,7 @@ body {
     color: #000;
     font-weight: 600;
     margin-bottom: 10px;
+    margin-top: 20px; /* Add margin-top to create space above headings */
 }
 
 .container p {
@@ -54,17 +56,12 @@ span {
     font-weight: bold;
 }
 
-.container h2, .container h3, .container p {
-    text-align: left;
-    margin: 10px 0;
-}
-
 .container h2::before, .container h3::before {
     content: "";
     display: block;
     height: 1px;
     background-color: #ccc;
-    margin: 20px 0;
+    margin: 10px 0; /* Adjust the margin to fit your layout */
 }
 
 p span {
