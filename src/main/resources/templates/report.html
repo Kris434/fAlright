@@ -11,35 +11,35 @@
     <div class="container">
         <h1>Raport:</h1>
 
-        <h2>Samolot z największą liczbą lotów:</h2>
+        <h2>Samoloty z największą liczbą lotów:</h2>
         <div th:if="${aircraftWithMostFlights}">
             <p th:each="aircraft : ${aircraftWithMostFlights}">
                 Model: <span th:text="${aircraft[0]}"></span>, Liczba lotów: <span th:text="${aircraft[1]}"></span>
             </p>
         </div>
 
-        <h2>Lot z największą liczbą rezerwacji:</h2>
+        <h2>Loty z największą liczbą rezerwacji:</h2>
         <div th:if="${flightWithMostReservations}">
             <p th:each="flight : ${flightWithMostReservations}">
                 Wylot: <span th:text="${flight[0]}"></span>, Przylot: <span th:text="${flight[1]}"></span>, Liczba rezerwacji: <span th:text="${flight[2]}"></span>
             </p>
         </div>
 
-        <h2>Najdłuższy lot:</h2>
+        <h2>Najdłuższe loty:</h2>
         <div th:if="${longestFlight}">
             <p th:each="flight : ${longestFlight}">
                 Wylot: <span th:text="${flight[0]}"></span>, Przylot: <span th:text="${flight[1]}"></span>, Czas trwania (godziny): <span th:text="${flight[2]}"></span>
             </p>
         </div>
 
-        <h2>Najdroższy lot:</h2>
+        <h2>Najdroższe loty:</h2>
         <div th:if="${mostExpensiveFlight}">
             <p th:each="flight : ${mostExpensiveFlight}">
                 Wylot: <span th:text="${flight[0]}"></span>, Przylot: <span th:text="${flight[1]}"></span>, Cena: <span th:text="${flight[2]}"></span>
             </p>
         </div>
 
-        <h2>Lot z największą możliwą liczbą pasażerów:</h2>
+        <h2>Loty z największą możliwą liczbą pasażerów:</h2>
         <div th:if="${flightWithMostPassengers}">
             <p th:each="flight : ${flightWithMostPassengers}">
                 Wylot: <span th:text="${flight[0]}"></span>, Przylot: <span th:text="${flight[1]}"></span>, Liczba pasażerów: <span th:text="${flight[2]}"></span>
