@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlightAlright - Usunięcie lotu</title>
+    <link rel="stylesheet" href="/css/reservation.css">
+    <link rel="stylesheet" href="/css/header.css">
+</head>
+<body>
+
+<header th:replace="~{fragments/header :: header}"></header>
+
+<div class="reservation-container">
+    <h1 class="reservation-title">Usuwanie lotu</h1>
+
+    <p>Usunięcie samolotu spowoduje usunięcie powiązanych z nim lotów!</p>
+
+    <form th:action="@{/employee/deleteAircraft}" method="post" class="reservation-form">
+        <label for="aircraft" class="form-label">Lot</label>
+        <select id="aircraft" name="aircraftId">
+            <option th:each="aircraft : ${aircrafts}" th:if="${aircraft.getStatus() != false}" th:value="${aircraft.getAircraft_id()}" >
+                <span th:text="${'Model: ' + aircraft.getModel() + ', Ilość miejsc: ' + aircraft.getCapacity()}"></span>
+            </option>
+        </select>
+
+        <button type="submit" class="submit-button">Usuń</button>
+    </form>
+</div>
+
+</body>
+</html>

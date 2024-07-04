@@ -52,7 +52,7 @@
             <div class="card-details">
                 <label for="aircraft">Samolot</label>
                 <select id="aircraft" name="aircraftId">
-                    <option th:each="aircraft : ${session.aircrafts}" th:value="${aircraft.aircraft_id}">
+                    <option th:each="aircraft : ${session.aircrafts}" th:if="${aircraft.getStatus() == true}" th:value="${aircraft.aircraft_id}">
                         <span th:text="${aircraft.model}"></span>
                         <span>, </span>
                         <span th:text="${aircraft.capacity}"></span>

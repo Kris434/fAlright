@@ -226,4 +226,34 @@ public class EmployeeController {
 
         return "redirect:/employee";
     }
+
+    @PreAuthorize("hasRole('EMPLOYEE')")
+    @GetMapping("/employee/showAircrafts")
+    public String showAircrafts(Model model) {
+
+        model.addAttribute("aircrafts", aircraftRepository.findAll());
+        return "showAircrafts";
+    }
+
+    @PreAuthorize("hasRole('EMPLOYEE')")
+    @PostMapping("/employee/deleteAircraft")
+    public String deleteAircraft(@RequestParam("aircraftId") Integer id, RedirectAttributes redirectAttributes) {
+
+        Aircrafts aircraft = aircraftRepository.findById(id).orElse(null);
+
+        if(aircraft != null) {
+            List<Flights> flights = flightRepository.findFlightsByAircraft(aircraft);
+
+            for(Flights flight : flights) {
+                flight.setStatus(false);
+                flightRepository.save(flight);
+            }
+
+            aircraft.setStatus(false);
+            aircraftRepository.save(aircraft);
+            redirectAttributes.addFlashAttribute("message", "Samolot został usunięty pomyślnie!");
+        }
+
+        return "redirect:/employee";
+    }
 }
