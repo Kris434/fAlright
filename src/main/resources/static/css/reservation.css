@@ -1,18 +1,35 @@
-
-body {
+* {
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    text-align: center;
+    padding: 20px;
+    background-image: url('https://static.vecteezy.com/system/resources/previews/002/468/358/original/flat-airplane-icon-on-blue-background-free-vector.jpg');
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+    color: #333;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
 .reservation-container {
-    width: 400px;
-    margin: 200px auto;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    border-radius: 20px;
+    background-color: #68BBE3;
     padding: 20px;
-    display: flex;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    width: 50%;
+    max-width: 480px;
 }
 
 
@@ -75,4 +92,16 @@ a {
 .message{
     color: white;
     text-align: center;
+}
+
+.form-label
+{
+    color: white;
+    margin-bottom: 5px;
+}
+
+.reservation-title
+{
+    color: white;
+    margin-bottom: 5px;
 }

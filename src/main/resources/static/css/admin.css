@@ -84,7 +84,12 @@ body {
     color: white;
 }
 
-.assign-role {
+.message{
+    color: white;
+    text-align: center;
+}
+
+.subheader {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -100,11 +105,34 @@ body {
     border: none;
 }
 
-.assign-role:hover {
+.assign-role
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: 100%;
+    font-size: 17px;
+    color: #fff;
+    border-radius: 10px;
+    background-color: #5a77e6;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.5s;
+    border: none;
+}
+
+.assign-role:hover
+{
     background-color: #4395DC;
 }
 
-.message{
-    color: white;
-    text-align: center;
+.subheader
+{
+    background-color: #4395DC;
 }
+
+
+
+
+
